@@ -1,0 +1,54 @@
+.description {
+  width: 100%;
+  padding-top: 1.2rem;
+  padding-bottom: 2.5rem;
+  background-color: var(--background-color-primary);
+}
+
+.description p {
+  font-size: 1.2rem;
+}
+
+.heroContainer {
+  position: relative;
+  display: flex;
+  align-items: end;
+  height: 100vh;
+  max-height: 900px;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heroImgContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.heroImgContainer::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(0, 0, 0), transparent);
+  pointer-events: none;
+}
+
+.infoContainer {
+  z-index: 99;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 2rem;
+}
