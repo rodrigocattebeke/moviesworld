@@ -1,11 +1,11 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import { Hero } from "@/components/Hero/Hero";
+import { MovieCarousel } from "@/components/movie/MovieCarousel/MovieCarousel";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Hero />
+      <MovieCarousel />
     </>
   );
 }

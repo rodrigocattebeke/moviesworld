@@ -2,7 +2,7 @@
 :root {
   /* BACKGROUND COLORS */
   --background-color-primary: #151517;
-  --background-color-primary-75: #212123df;
+  --background-color-primary-75: #212123b7;
   --background-color-secondary: rgba(255, 255, 255, 0.25);
   --background-color-secondary-25: rgba(255, 255, 255, 0.25);
 
@@ -12,6 +12,12 @@
   --font-secondary-color: rgb(0, 0, 0);
   --font-secondary-color-hover: rgb(59, 59, 59);
   --font-tertiary-color: rgb(189, 189, 189);
+
+  /* ICONS COLORS */
+  --icon-primary-color: #c6c6c6;
+  --icon-primary-color-hover: #a6a6a6;
+  --icon-secondary-color: #fbde3c;
+  --icon-secondary-color-hover: #d3bb33;
 
   /* PAGE COLORS */
   --primary-color: #e6a10e;
@@ -58,4 +64,23 @@ a {
 
 .button:hover {
   background-color: var(--primary-color-hover);
+}
+
+/* ICONS COLORS */
+.icon-primary {
+  fill: var(--icon-primary-color);
+  transition: fill 0.5s;
+}
+
+.icon-primary:hover {
+  fill: var(--icon-primary-color-hover);
+}
+
+.icon-secondary {
+  fill: var(--icon-secondary-color);
+  transition: fill 0.5s;
+}
+
+.icon-secondary:hover {
+  fill: var(--icon-secondary-color-hover);
 }

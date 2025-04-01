@@ -12,17 +12,6 @@
   z-index: 999;
 }
 
-.menuIcon {
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.menuIcon:hover {
-  filter: contrast(0.6);
-}
-
 .navbar {
   height: 2.2rem;
 }
@@ -63,16 +52,8 @@
   border-radius: 22rem;
 }
 
-.searchContainer img {
-  width: 1.25rem;
-  height: 1.25rem;
-  filter: contrast(0.8);
-  transition: 0.5s;
+.searchContainer svg {
   cursor: pointer;
-}
-
-.searchContainer img:hover {
-  filter: contrast(0.5);
 }
 
 .searchInput {
