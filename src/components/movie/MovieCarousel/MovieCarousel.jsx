@@ -1,27 +1,27 @@
 "use client";
 import { getMovies } from "@/helpers/moviesInfo";
-import React from "react";
 import Slider from "react-slick";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
+import styles from "./MovieCarousel.module.css";
 
-export const MovieCarousel = () => {
+export const MovieCarousel = ({ title = "Peliculas en tendencia" }) => {
   const movie = getMovies();
 
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div className={className} style={{ ...style, display: "block", backgroundColor: "var(--background-color-primary)", left: "0" }} onClick={onClick}>
+      <div className={`${className} ${styles.prevArrow}`} style={{ ...style }} onClick={onClick}>
         <ArrowBack />
       </div>
     );
   };
 
-  const ArrowNext = (props) => {
+  const NextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div className={className} style={{ ...style, display: "block", backgroundColor: "var(--background-color-primary)", right: "0" }} onClick={onClick}>
+      <div className={`${className} ${styles.nextArrow}`} onClick={onClick}>
         <ArrowForward />
       </div>
     );
@@ -34,7 +34,7 @@ export const MovieCarousel = () => {
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 2,
-    nextArrow: <ArrowNext />,
+    nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
       {
@@ -71,7 +71,8 @@ export const MovieCarousel = () => {
   };
 
   return (
-    <section className="container-xxl">
+    <section className="container-xxl my-5">
+      <h2 className={`${styles.title}`}>{title}</h2>
       <Slider {...settings}>
         {movieArray.map((movie, i) => (
           <MovieCard movieData={movie} key={i} />
