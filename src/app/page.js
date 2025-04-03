@@ -5,7 +5,8 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <MovieCarousel />
+      <MovieCarousel title="Peliculas populares" route="peliculas/populares" />
+      <MovieCarousel title="Mejores valoradas" route="peliculas/mejores_valoradas" />
     </>
   );
 }

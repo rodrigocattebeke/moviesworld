@@ -1,13 +1,22 @@
 "use client";
-import { getMovies } from "@/helpers/moviesInfo";
 import Slider from "react-slick";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
 import styles from "./MovieCarousel.module.css";
+import { useEffect, useState } from "react";
 
-export const MovieCarousel = ({ title = "Peliculas en tendencia" }) => {
-  const movie = getMovies();
+export const MovieCarousel = ({ title = "Peliculas populares", route = "peliculas/populares" }) => {
+  const [movies, setMovies] = useState(null);
+
+  useEffect(() => {
+    async function getMoviesTopRated() {
+      const res = await fetch(`/api/${route}`);
+      const data = await res.json();
+      setMovies(data.results);
+    }
+    getMoviesTopRated();
+  }, []);
 
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -27,7 +36,6 @@ export const MovieCarousel = ({ title = "Peliculas en tendencia" }) => {
     );
   };
 
-  const movieArray = [movie, movie, movie, movie, movie, movie, movie, movie, movie, movie, movie, movie, movie, movie];
   const settings = {
     dots: false,
     infinite: false,
@@ -70,11 +78,13 @@ export const MovieCarousel = ({ title = "Peliculas en tendencia" }) => {
     ],
   };
 
-  return (
+  return !movies ? (
+    ""
+  ) : (
     <section className="container-xxl my-5">
       <h2 className={`${styles.title}`}>{title}</h2>
       <Slider {...settings}>
-        {movieArray.map((movie, i) => (
+        {movies.map((movie, i) => (
           <MovieCard movieData={movie} key={i} />
         ))}
       </Slider>
