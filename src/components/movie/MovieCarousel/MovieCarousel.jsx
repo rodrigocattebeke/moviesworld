@@ -81,7 +81,7 @@ export const MovieCarousel = ({ title = "Peliculas populares", route = "pelicula
   return !movies ? (
     ""
   ) : (
-    <section className="container-xxl my-5">
+    <section className="container-xxl my-5 overflow-x-hidden">
       <h2 className={`${styles.title}`}>{title}</h2>
       <Slider {...settings}>
         {movies.map((movie, i) => (

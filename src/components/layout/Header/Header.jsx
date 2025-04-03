@@ -9,7 +9,7 @@ export const Header = () => {
     <header className={`${styles.header} container-fluid`}>
       <nav className={`${styles.navbar} container-xxl`}>
         <div className="container-fluid h-100">
-          <div className="row h-100">
+          <div className="row h-100 m-0">
             <div className={`${styles.searchContainer} d-flex pe-0 align-items-center col-6 col-xl-5`}>
               <Search width={"1.25rem"} height={"1.25rem"} />
               <input type="search" id="searchInput" className={`${styles.searchInput}`} placeholder="Encuentra series y películas"></input>
