@@ -13,6 +13,9 @@
   --font-secondary-color-hover: rgb(59, 59, 59);
   --font-tertiary-color: rgb(189, 189, 189);
 
+  /* HEADER  */
+  --header-height: 3.7rem;
+
   /* ICONS COLORS */
   --icon-primary-color: #c6c6c6;
   --icon-primary-color-hover: #a6a6a6;
