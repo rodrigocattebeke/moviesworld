@@ -1,0 +1,36 @@
+.descriptionContainer {
+  margin-left: 0.4rem;
+}
+
+.descriptionContainer p {
+  margin: 0 0 0.2rem 0;
+  font-size: 1rem;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 3.125rem;
+  height: 100%;
+}
+
+.imgContainer img {
+  width: 3.125rem;
+  height: auto;
+  border-radius: 0.2rem;
+}
+
+.result {
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.result:hover {
+  background-color: var(--background-color-secondary-25);
+}

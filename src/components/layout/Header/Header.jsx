@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import { Menu } from "@/components/icons/Menu";
-import { Search } from "@/components/icons/Search";
+import { SearchInput } from "./SearchInput/SearchInput";
 
 export const Header = () => {
   return (
@@ -10,11 +10,10 @@ export const Header = () => {
       <nav className={`${styles.navbar} container-xxl`}>
         <div className="container-fluid h-100">
           <div className="row h-100 m-0">
-            <div className={`${styles.searchContainer} d-flex pe-0 align-items-center col-6 col-xl-5`}>
-              <Search width={"1.25rem"} height={"1.25rem"} />
-              <input type="search" id="searchInput" className={`${styles.searchInput}`} placeholder="Encuentra series y películas"></input>
+            <div className={`${styles.searchContainer} col-9 col-md-8 col-xl-5`}>
+              <SearchInput />
             </div>
-            <div className="col-6 col-xl-7 d-flex align-items-center">
+            <div className="col-3 col-md-4 col-xl-7 d-flex align-items-center">
               <div className="d-flex justify-content-end justify-content-xl-center w-100">
                 <div className="d-block d-xl-none">
                   <Menu width={"2rem"} height={"2rem"} />

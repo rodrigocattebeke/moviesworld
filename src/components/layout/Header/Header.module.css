@@ -47,29 +47,14 @@
 }
 
 .searchContainer {
+  display: flex;
+  position: relative;
+  padding-right: 0;
+  align-items: center;
   background-color: var(--background-color-secondary-25);
   border-radius: 22rem;
 }
 
 .searchContainer svg {
   cursor: pointer;
-}
-
-.searchInput {
-  width: 100%;
-  height: 100%;
-  border-radius: 10rem;
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
-  background-color: transparent;
-  border: none;
-  color: inherit;
-}
-
-.searchInput::placeholder {
-  color: var(--font-tertiary-color);
-}
-
-.searchInput:focus {
-  outline: none;
 }

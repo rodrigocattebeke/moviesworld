@@ -1,0 +1,49 @@
+.backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: 100%;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: var(--background-color-tertiary);
+}
+
+.form {
+  display: flex;
+  width: 100%;
+}
+
+.resultContainer {
+  width: 100%;
+  height: auto;
+  max-height: 32rem;
+  overflow-y: auto;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rem;
+  padding-left: 0.7rem;
+  padding-right: 0.2rem;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+
+.searchInput::placeholder {
+  color: var(--font-tertiary-color);
+}
+
+.searchInput:focus {
+  outline: none;
+}

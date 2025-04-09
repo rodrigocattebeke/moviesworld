@@ -14,7 +14,6 @@ export default function Buscar() {
     const getResults = async () => {
       const res = await fetch(`/api/buscar?q=${query}`);
       const results = await res.json();
-      console.log(results);
       setResults(results);
       setIsLoading(false);
     };
