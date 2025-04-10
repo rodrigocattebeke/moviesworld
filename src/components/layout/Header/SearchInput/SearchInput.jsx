@@ -3,15 +3,25 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./SearchInput.module.css";
 import { Search } from "@/components/icons/Search";
 import { Result } from "./Result/Result";
+import { useRouter } from "next/navigation";
 
 export const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
   const [movies, setMovies] = useState(undefined);
   const [isSuccess, setIsSuccess] = useState(false);
   const timeoutRef = useRef();
+  const router = useRouter();
 
-  const onInputChange = (e) => {
+  const handleInputChange = (e) => {
     setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (e.target.searchInput && e.target.searchInput.blur) e.target.searchInput.blur();
+    router.push(`/buscar?q=${encodeURIComponent(inputValue)}`);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setMovies(undefined);
   };
 
   //Search input value on change
@@ -41,9 +51,9 @@ export const SearchInput = () => {
 
   return (
     <>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Search width={"1.25rem"} height={"1.25rem"} />
-        <input type="search" id="searchInput" className={`${styles.searchInput}`} placeholder="Encuentra series y películas" onChange={onInputChange} value={inputValue} />
+        <input type="search" id="searchInput" name="searchInput" className={`${styles.searchInput}`} placeholder="Encuentra series y películas" onChange={handleInputChange} value={inputValue} />
 
         {/* Search result modal */}
 

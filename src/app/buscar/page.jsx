@@ -13,6 +13,8 @@ export default function Buscar() {
 
   useEffect(() => {
     const getResults = async () => {
+      setIsLoading(true);
+
       const res = await fetch(`/api/buscar?q=${query}`);
       const results = await res.json();
       setResults(results);
