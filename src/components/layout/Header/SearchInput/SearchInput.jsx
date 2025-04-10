@@ -6,7 +6,7 @@ import { Result } from "./Result/Result";
 
 export const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState(undefined);
   const [isSuccess, setIsSuccess] = useState(false);
   const timeoutRef = useRef();
 
@@ -16,7 +16,11 @@ export const SearchInput = () => {
 
   //Search input value on change
   useEffect(() => {
-    if (/^\s*$/.test(inputValue)) return;
+    if (/^\s*$/.test(inputValue)) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+      return setMovies(undefined);
+    }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -29,7 +33,7 @@ export const SearchInput = () => {
         console.warn(error);
         setIsSuccess(true);
       }
-    }, 800);
+    }, 1000);
     return () => {
       clearTimeout(timeoutRef.current);
     };

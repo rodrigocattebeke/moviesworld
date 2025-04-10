@@ -4,6 +4,8 @@
   width: 100%;
   height: auto;
   min-height: 2rem;
+  background-color: var(--background-color-primary);
+  z-index: 9;
 }
 
 .title {

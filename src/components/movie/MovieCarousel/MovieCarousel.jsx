@@ -85,7 +85,7 @@ export const MovieCarousel = ({ title = "Peliculas populares", route = "pelicula
       <h2 className={`${styles.title}`}>{title}</h2>
       <Slider {...settings}>
         {movies.map((movie, i) => (
-          <MovieCard movieData={movie} key={i} />
+          <MovieCard movie={movie} key={i} />
         ))}
       </Slider>
     </section>

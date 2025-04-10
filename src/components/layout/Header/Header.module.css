@@ -4,7 +4,7 @@
   align-items: center;
   height: var(--header-height);
   top: 0;
-  background-color: var(--background-color-primary-75);
+  background-color: var(--background-color-primary);
   color: var(--font-primary-color);
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
@@ -48,8 +48,7 @@
 
 .searchContainer {
   display: flex;
-  position: relative;
-  padding-right: 0;
+  padding: 0 !important;
   align-items: center;
   background-color: var(--background-color-secondary-25);
   border-radius: 22rem;
