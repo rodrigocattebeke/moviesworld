@@ -1,7 +1,7 @@
 /* CSS VARIABLES */
 :root {
   /* BACKGROUND COLORS */
-  --background-color-primary: #151517;
+  --background-color-primary: #121212;
   --background-color-primary-75: #212123b7;
   --background-color-secondary: rgba(255, 255, 255);
   --background-color-secondary-25: rgba(255, 255, 255, 0.25);
@@ -24,8 +24,8 @@
   --icon-secondary-color-hover: #d3bb33;
 
   /* PAGE COLORS */
-  --primary-color: #e6a10e;
-  --primary-color-hover: #f1ae1d;
+  --primary-color: #ecb100;
+  --primary-color-hover: #ffbf00;
 }
 
 /* RESET AND NORMALIZE */

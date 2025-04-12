@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import styles from "./buscar.module.css";
 import { useEffect, useState } from "react";
 import { MovieList } from "@/components/movie/MovieList/MovieList";
@@ -11,10 +11,11 @@ export default function Buscar() {
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  if (!query) return notFound();
+
   useEffect(() => {
     const getResults = async () => {
       setIsLoading(true);
-
       const res = await fetch(`/api/buscar?q=${query}`);
       const results = await res.json();
       setResults(results);
