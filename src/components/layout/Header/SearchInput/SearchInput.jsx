@@ -49,6 +49,10 @@ export const SearchInput = () => {
     };
   }, [inputValue]);
 
+  const clearMovies = () => {
+    setMovies(null);
+  };
+
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -63,7 +67,7 @@ export const SearchInput = () => {
           <p>Ocurrio un error al buscar la película.</p>
         ) : (
           <div className={styles.container}>
-            <div className={styles.resultContainer}>{movies.length == 0 ? <p>No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} />)}</div>
+            <div className={styles.resultContainer}>{movies.length == 0 ? <p>No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} onClick={clearMovies} />)}</div>
             {movies.length}
           </div>
         )}
