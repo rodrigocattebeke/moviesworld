@@ -13,7 +13,7 @@ export const Result = ({ movie = null }) => {
       </div>
       <div className={`${styles.descriptionContainer}`}>
         <p>{movie.title || ""}</p>
-        <small>{movie.release_date.split("-")[0] || ""}</small>
+        <small>{movie.release_date ? movie.release_date.split("-")[0] : ""}</small>
       </div>
     </div>
   );

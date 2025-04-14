@@ -10,15 +10,16 @@ export default function Buscar() {
   const query = searchParams.get("q");
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   if (!query) return notFound();
 
   useEffect(() => {
     const getResults = async () => {
       setIsLoading(true);
-      const res = await fetch(`/api/buscar?q=${query}`);
+      const res = await fetch(`/api/buscar?q=${query}&page=${page}`);
       const results = await res.json();
-      setResults(results);
+      setResults(results.results);
       setIsLoading(false);
     };
     getResults();
@@ -31,7 +32,7 @@ export default function Buscar() {
           <h2 className={`${styles.title}`}>Resultados de busqueda para: {query}</h2>
         </div>
       </div>
-      <div className={`${styles.resultsContainer} container`}>{isLoading ? <p>Cargando...</p> : <MovieList movies={results.results} mode="search" />}</div>
+      <div className={`${styles.resultsContainer} container`}>{isLoading ? <p>Cargando...</p> : <MovieList movies={results} mode="search" />}</div>
     </section>
   );
 }

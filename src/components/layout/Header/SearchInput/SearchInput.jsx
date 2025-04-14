@@ -36,7 +36,7 @@ export const SearchInput = () => {
     }
     timeoutRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/buscar?q=${encodeURIComponent(inputValue.trim())}`);
+        const res = await fetch(`/api/buscar?q=${encodeURIComponent(inputValue.trim())}&page=1`);
         const data = await res.json();
         setMovies(data.results);
       } catch (error) {
@@ -63,7 +63,8 @@ export const SearchInput = () => {
           <p>Ocurrio un error al buscar la película.</p>
         ) : (
           <div className={styles.container}>
-            <div className={styles.resultContainer}>{movies.length == 0 ? <p>No hay resultados para la busqueda</p> : movies.map((movie) => <Result movie={movie} />)}</div>
+            <div className={styles.resultContainer}>{movies.length == 0 ? <p>No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} />)}</div>
+            {movies.length}
           </div>
         )}
 

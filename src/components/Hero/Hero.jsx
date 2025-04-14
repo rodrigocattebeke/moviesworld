@@ -7,7 +7,6 @@ export const Hero = async () => {
   const data = await res.json();
   const heroMovie = data.results[0];
   const backdropImg = getBackdropUrl(heroMovie.backdrop_path);
-  console.log(heroMovie);
 
   return (
     <section className={`${styles.heroContainer} container-xxl p-0`}>
