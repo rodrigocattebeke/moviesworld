@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./MovieCard.module.css";
 import { MovieRate } from "./MovieRate/MovieRate";
 import { getPosterUrl } from "@/utils/getPosterUrl";
+import Link from "next/link";
 
 export const MovieCard = ({ movie = undefined, mode = "" }) => {
   if (!movie) return console.error("Se debe de pasar una pelicula.");

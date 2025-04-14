@@ -1,9 +1,13 @@
+import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
+
 export async function GET(req) {
-  const query = req.nextUrl.searchParams.get("q");
+  const movie_id = req.nextUrl.searchParams.get("id_pelicula");
 
-  console.log(query);
-
-  //   const array = moviesArray();
-
-  //   return Response.json(array, { status: 200 });
+  try {
+    const res = await fetchFromTMDB(`/movie/${movie_id}`, "language=es-ES");
+    return Response.json(res, { status: 200 });
+  } catch (error) {
+    console.warn(error);
+    return Response.json(error, { status: 500 });
+  }
 }

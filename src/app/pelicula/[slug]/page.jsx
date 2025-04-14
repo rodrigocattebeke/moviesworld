@@ -1,30 +1,28 @@
 "use client";
 
-import { notFound, useSearchParams } from "next/navigation";
-import styles from "./Pelicula.module.css";
+import { notFound, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import movieExample from "@/app/api/movie.json";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
 
 export default function Pelicula() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("q");
+  const { slug } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  if (!query) return notFound();
+  if (!slug) return notFound();
 
   useEffect(() => {
     const getResults = async () => {
       setIsLoading(true);
-      //   const res = await fetch(`/api/pelicula?q=${query}`);
-      //   const results = await res.json();
-      const result = movieExample;
+      const id_pelicula = slug.split("-").pop();
+      const res = await fetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
+      const result = await res.json();
+      console.log(result);
       setMovie(result);
       setIsLoading(false);
     };
     getResults();
-  }, [query]);
+  }, [slug]);
 
   return !movie ? (
     ""
