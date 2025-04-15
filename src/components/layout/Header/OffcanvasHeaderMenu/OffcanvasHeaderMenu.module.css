@@ -1,0 +1,13 @@
+.headerUl {
+  padding-left: 1rem;
+  list-style: none;
+}
+
+.headerUl a:hover {
+  color: var(--font-primary-color-hover);
+}
+
+.offcanvas {
+  background-color: var(--background-color-primary);
+  color: var(--font-primary-color);
+}

@@ -3,7 +3,7 @@ import styles from "./Hero.module.css";
 import { getBackdropUrl } from "@/utils/getBackdropUrl";
 
 export const Hero = async () => {
-  const res = await fetch("http://localhost:3000/api/peliculas/populares");
+  const res = await fetch("https://moviesloc.netlify.app/api/peliculas/populares");
   const data = await res.json();
   const heroMovie = data.results[0];
   const backdropImg = getBackdropUrl(heroMovie.backdrop_path);

@@ -3,6 +3,7 @@ import styles from "./Header.module.css";
 import Image from "next/image";
 import { Menu } from "@/components/icons/Menu";
 import { SearchInput } from "./SearchInput/SearchInput";
+import { OffcanvasHeaderMenu } from "./OffcanvasHeaderMenu/OffcanvasHeaderMenu";
 
 export const Header = () => {
   return (
@@ -16,9 +17,11 @@ export const Header = () => {
             <div className="col-3 col-md-4 col-xl-7 d-flex align-items-center">
               <div className="d-flex justify-content-end justify-content-xl-center w-100">
                 <div className="d-block d-xl-none">
-                  <Menu width={"2rem"} height={"2rem"} />
+                  <a data-bs-toggle="offcanvas" data-bs-target="#headerOffcanvasMenu" role="button" aria-controls="headerOffcanvasMenu">
+                    <Menu width={"2rem"} height={"2rem"} />
+                  </a>
                 </div>
-
+                {/* dont show when screen < xl size */}
                 <div className={`${styles.navbarLinks} d-none d-xl-flex`}>
                   <ul className="d-flex flex-row">
                     <li>
@@ -42,6 +45,7 @@ export const Header = () => {
           </div>
         </div>
       </nav>
+      <OffcanvasHeaderMenu />
     </header>
   );
 };
