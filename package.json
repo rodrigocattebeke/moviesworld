@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.10.5",
     "bootstrap": "^5.3.3",
-    "next": "15.2.3",
+    "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-slick": "^0.30.3",
