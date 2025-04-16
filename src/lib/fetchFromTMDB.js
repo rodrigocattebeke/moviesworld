@@ -2,7 +2,7 @@ const TMDB_API_URL = `https://api.themoviedb.org/3`;
 const TMDB_ACCESS_KEY = process.env.TMDB_ACCESS_KEY;
 
 export async function fetchFromTMDB(endpoint, params = "") {
-  const url = `${TMDB_API_URL}${endpoint}?${params}`;
+  const url = `${TMDB_API_URL}${endpoint}?language=es-ES&${params}`;
 
   try {
     const res = await fetch(`${url}`, {
