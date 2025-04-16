@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
-        <Script src="/assets/js/bootstrap.min.js" />
+        <Script src="/assets/js/bootstrap.bundle.min.js" />
       </body>
     </html>
   );

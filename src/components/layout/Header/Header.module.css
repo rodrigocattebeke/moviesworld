@@ -15,37 +15,6 @@
   height: 2.2rem;
 }
 
-.navbarLinks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.navbarLinks ul {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.navbarLinks a {
-  text-decoration: none;
-  color: var(--font-primary-color);
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.navbarLinks a:hover {
-  color: var(--font-primary-color-hover);
-}
-
-.registerButton {
-  color: var(--font-secondary-color) !important;
-}
-
 .searchContainer {
   display: flex;
   padding: 0 !important;
