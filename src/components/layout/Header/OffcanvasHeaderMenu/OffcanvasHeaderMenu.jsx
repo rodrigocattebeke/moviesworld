@@ -16,16 +16,24 @@ export const OffcanvasHeaderMenu = () => {
             <h4>Peliculas</h4>
             <ul className={styles.headerUl}>
               <li>
-                <Link href="#">Lo más popular</Link>
+                <Link href="/peliculas/populares" data-bs-dismiss="offcanvas">
+                  Lo más popular
+                </Link>
               </li>
               <li>
-                <Link href="#">Destacados</Link>
+                <Link href="/peliculas/mejores_valoradas" data-bs-dismiss="offcanvas">
+                  Mejores valoradas
+                </Link>
               </li>
               <li>
-                <Link href="#">Categorias</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Categorias
+                </Link>
               </li>
               <li>
-                <Link href="#">Lo más nuevo</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Lo más nuevo
+                </Link>
               </li>
             </ul>
           </div>
@@ -33,16 +41,24 @@ export const OffcanvasHeaderMenu = () => {
             <h4>Series</h4>
             <ul className={styles.headerUl}>
               <li>
-                <Link href="#">Lo más popular</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Lo más popular
+                </Link>
               </li>
               <li>
-                <Link href="#">Destacados</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Mejores valoradas
+                </Link>
               </li>
               <li>
-                <Link href="#">Categorias</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Categorias
+                </Link>
               </li>
               <li>
-                <Link href="#">Lo más nuevo</Link>
+                <Link href="#" data-bs-dismiss="offcanvas">
+                  Lo más nuevo
+                </Link>
               </li>
             </ul>
           </div>
