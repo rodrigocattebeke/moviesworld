@@ -11,8 +11,8 @@
 
 .heroContainer {
   position: relative;
-  display: grid;
-  grid-template-rows: 70%;
+  display: flex;
+  flex-direction: column;
   height: auto;
   min-height: 90vh;
 }
@@ -33,8 +33,9 @@
   justify-content: center;
   top: 0;
   left: 0;
+  height: auto;
+  min-height: 26rem;
   width: 100%;
-  grid-row: 1/2;
 }
 
 .heroImgContainer::after {
@@ -71,11 +72,15 @@
 }
 
 @media screen and (max-width: 730px) {
-  .title {
-    font-size: 2rem;
-  }
-
   .description p {
     font-size: 1rem;
+  }
+
+  .heroImgContainer {
+    min-height: 30rem;
+  }
+
+  .title {
+    font-size: 2rem;
   }
 }
