@@ -1,5 +1,4 @@
 import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
-import { moviesArray } from "../../moviesArray";
 
 export async function GET(req) {
   try {
