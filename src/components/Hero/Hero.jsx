@@ -26,7 +26,7 @@ export const Hero = async () => {
                   <p>{heroMovie.overview}</p>
                 </div>
                 <div className="d-flex justify-content-center justify-content-md-end align-items-center col-12 col-md-3">
-                  <Link href={"#"}>
+                  <Link href={`/pelicula/${encodeURIComponent(heroMovie.title)}-${heroMovie.id}`}>
                     <button className="button">Ver ahora</button>
                   </Link>
                 </div>
