@@ -6,9 +6,11 @@ export const OffcanvasHeaderMenu = () => {
     <>
       <div className={`${styles.offcanvas} offcanvas offcanvas-start`} tabIndex="-1" id="headerOffcanvasMenu" aria-labelledby="headerOffcanvasMenuLabel">
         <div className="offcanvas-header">
-          <h3 className="offcanvas-title" id="headerOffcanvasMenuLabel">
-            Movies Loc
-          </h3>
+          <Link href={"/"}>
+            <h3 className="offcanvas-title" id="headerOffcanvasMenuLabel" data-bs-dismiss="offcanvas">
+              Movies Loc
+            </h3>
+          </Link>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
