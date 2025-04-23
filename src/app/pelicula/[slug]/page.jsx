@@ -32,7 +32,7 @@ export default function Pelicula() {
   }, [slug]);
 
   return (
-    <div className="container-xxl" style={{ minHeight: "30vh" }}>
+    <div className="container-xxl p-0" style={{ minHeight: "30vh" }}>
       {isLoading ? (
         <div className="container mt-3">
           <Loader />
