@@ -4,6 +4,7 @@ import { notFound, useSearchParams } from "next/navigation";
 import styles from "./buscar.module.css";
 import { useEffect, useState } from "react";
 import { MovieList } from "@/components/movie/MovieList/MovieList";
+import { Loader } from "@/components/Loader/Loader";
 
 export default function Buscar() {
   const searchParams = useSearchParams();
@@ -32,7 +33,7 @@ export default function Buscar() {
           <h2 className={`${styles.title}`}>Resultados de busqueda para: {query}</h2>
         </div>
       </div>
-      <div className={`${styles.resultsContainer} container`}>{isLoading ? <p>Cargando...</p> : <MovieList movies={results} mode="search" />}</div>
+      <div className={`${styles.resultsContainer} container`}>{isLoading ? <Loader /> : <MovieList movies={results} mode="search" />}</div>
     </section>
   );
 }

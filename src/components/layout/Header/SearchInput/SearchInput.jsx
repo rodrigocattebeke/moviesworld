@@ -67,8 +67,7 @@ export const SearchInput = () => {
           <p>Ocurrio un error al buscar la película.</p>
         ) : (
           <div className={styles.container}>
-            <div className={styles.resultContainer}>{movies.length == 0 ? <p>No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} onClick={clearMovies} />)}</div>
-            {movies.length}
+            <div className={styles.resultContainer}>{movies.length == 0 ? <p className="m-0 ps-3 py-2">No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} onClick={clearMovies} />)}</div>
           </div>
         )}
 
