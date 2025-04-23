@@ -27,7 +27,7 @@ export const OffcanvasHeaderMenu = () => {
                   Mejores valoradas
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="#" data-bs-dismiss="offcanvas">
                   Categorias
                 </Link>
@@ -36,10 +36,10 @@ export const OffcanvasHeaderMenu = () => {
                 <Link href="#" data-bs-dismiss="offcanvas">
                   Lo más nuevo
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
-          <div className="container">
+          {/* <div className="container">
             <h4>Series</h4>
             <ul className={styles.headerUl}>
               <li>
@@ -63,7 +63,7 @@ export const OffcanvasHeaderMenu = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

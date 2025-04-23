@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import { getBackdropUrl } from "@/utils/getBackdropUrl";
+import Link from "next/link";
 
 export const Hero = async () => {
   const res = await fetch("https://moviesloc.netlify.app/api/peliculas/populares");
@@ -25,7 +26,9 @@ export const Hero = async () => {
                   <p>{heroMovie.overview}</p>
                 </div>
                 <div className="d-flex justify-content-center justify-content-md-end align-items-center col-12 col-md-3">
-                  <button className="button">Ver ahora</button>
+                  <Link href={"#"}>
+                    <button className="button">Ver ahora</button>
+                  </Link>
                 </div>
               </div>
             </div>
