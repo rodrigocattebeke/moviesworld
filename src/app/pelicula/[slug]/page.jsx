@@ -3,6 +3,8 @@
 import { notFound, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
+import { Loader } from "@/components/Loader/Loader";
+import { MovieCarousel } from "@/components/movie/MovieCarousel/MovieCarousel";
 
 export default function Pelicula() {
   const { slug } = useParams();
@@ -14,21 +16,35 @@ export default function Pelicula() {
   useEffect(() => {
     const getResults = async () => {
       setIsLoading(true);
-      const id_pelicula = slug.split("-").pop();
-      const res = await fetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
-      const result = await res.json();
-      console.log(result);
-      setMovie(result);
-      setIsLoading(false);
+      try {
+        const id_pelicula = slug.split("-").pop();
+        const res = await fetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
+        const result = await res.json();
+        setMovie(result);
+      } catch (error) {
+        console.error(error);
+        setMovie(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
     getResults();
   }, [slug]);
 
-  return !movie ? (
-    ""
-  ) : (
-    <>
-      <MovieInformationView movie={movie} />
-    </>
+  return (
+    <div className="container-xxl" style={{ minHeight: "30vh" }}>
+      {isLoading ? (
+        <div className="container mt-3">
+          <Loader />
+        </div>
+      ) : !movie ? (
+        <h3>Ocurrio un error al cargar la película.</h3>
+      ) : (
+        <>
+          <MovieInformationView movie={movie} />
+          <MovieCarousel title={"Recomendaciones"} route="peliculas/populares" />
+        </>
+      )}
+    </div>
   );
 }

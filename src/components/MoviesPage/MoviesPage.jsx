@@ -17,7 +17,6 @@ export const MoviesPage = ({ title = "", url = undefined, initialPage = 1 }) => 
       try {
         const res = await fetch(`${url}?page=${page}`);
         const data = await res.json();
-        console.log(data);
         setResults(data.results);
       } catch (error) {
         console.error(error);

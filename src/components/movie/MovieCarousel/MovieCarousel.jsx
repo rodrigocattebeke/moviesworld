@@ -6,7 +6,7 @@ import { ArrowBack } from "@/components/icons/ArrowBack";
 import styles from "./MovieCarousel.module.css";
 import { useEffect, useState } from "react";
 
-export const MovieCarousel = ({ title = "Peliculas populares", route = "peliculas/populares" }) => {
+export const MovieCarousel = ({ title = undefined, route = "peliculas/populares" }) => {
   const [movies, setMovies] = useState(null);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export const MovieCarousel = ({ title = "Peliculas populares", route = "pelicula
     ""
   ) : (
     <section className="container-xxl my-5 overflow-x-hidden">
-      <h2 className={`${styles.title}`}>{title}</h2>
+      {title ? <h2 className={`${styles.title}`}>{title}</h2> : ""}
       <Slider {...settings}>
         {movies.map((movie, i) => (
           <MovieCard movie={movie} key={i} />
