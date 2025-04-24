@@ -16,8 +16,8 @@ export const MovieInformationView = ({ movie = {} }) => {
     setShowMore(!showMore);
   };
 
-  const moviePoster = getPosterUrl(movie.poster_path || "#");
-  const movieBackdrop = getBackdropUrl(movie.backdrop_path || "#");
+  const moviePoster = getPosterUrl(movie.poster_path);
+  const movieBackdrop = getBackdropUrl(movie.backdrop_path);
 
   return (
     <section className="container-xl py-4 position-relative">
