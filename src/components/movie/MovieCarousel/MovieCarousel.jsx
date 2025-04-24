@@ -5,15 +5,25 @@ import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
 import styles from "./MovieCarousel.module.css";
 import { useEffect, useState } from "react";
+import { Loader } from "@/components/Loader/Loader";
 
 export const MovieCarousel = ({ title = undefined, route = "peliculas/populares" }) => {
   const [movies, setMovies] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getMoviesTopRated() {
-      const res = await fetch(`/api/${route}`);
-      const data = await res.json();
-      setMovies(data.results);
+      try {
+        setIsLoading(true);
+        const res = await fetch(`/api/${route}`);
+        const data = await res.json();
+        setMovies(data.results);
+      } catch (error) {
+        console.warn(error);
+        setMovies(null);
+      } finally {
+        setIsLoading(false);
+      }
     }
     getMoviesTopRated();
   }, []);
@@ -78,16 +88,22 @@ export const MovieCarousel = ({ title = undefined, route = "peliculas/populares"
     ],
   };
 
-  return !movies ? (
-    ""
+  return isLoading ? (
+    <Loader />
   ) : (
     <section className="container-xxl my-5 overflow-x-hidden">
-      {title ? <h2 className={`${styles.title}`}>{title}</h2> : ""}
-      <Slider {...settings}>
-        {movies.map((movie, i) => (
-          <MovieCard movie={movie} key={i} />
-        ))}
-      </Slider>
+      {!movies ? (
+        <h3>Ocurrió un error al obtener los datos. Intente nuevamente más tarde.</h3>
+      ) : (
+        <>
+          {title ? <h2 className={`${styles.title}`}>{title}</h2> : ""}
+          <Slider {...settings}>
+            {movies.map((movie, i) => (
+              <MovieCard movie={movie} key={i} />
+            ))}
+          </Slider>
+        </>
+      )}
     </section>
   );
 };
