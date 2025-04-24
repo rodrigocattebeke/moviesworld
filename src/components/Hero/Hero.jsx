@@ -2,12 +2,14 @@ import Image from "next/image";
 import styles from "./Hero.module.css";
 import { getBackdropUrl } from "@/utils/getBackdropUrl";
 import Link from "next/link";
+import { titleToSlug } from "@/utils/titleToSlug";
 
 export const Hero = async () => {
   const res = await fetch("https://moviesloc.netlify.app/api/peliculas/populares");
   const data = await res.json();
   const heroMovie = data.results[0];
   const backdropImg = getBackdropUrl(heroMovie.backdrop_path);
+  const slug = titleToSlug(heroMovie.title);
 
   return (
     <section className={`${styles.heroContainer} container-xxl p-0`}>
@@ -26,7 +28,7 @@ export const Hero = async () => {
                   <p>{heroMovie.overview}</p>
                 </div>
                 <div className="d-flex justify-content-center justify-content-md-end align-items-center col-12 col-md-3">
-                  <Link href={`/pelicula/${encodeURIComponent(heroMovie.title)}-${heroMovie.id}`}>
+                  <Link href={`/pelicula/${slug}-${heroMovie.id}`}>
                     <button className="button">Ver ahora</button>
                   </Link>
                 </div>
