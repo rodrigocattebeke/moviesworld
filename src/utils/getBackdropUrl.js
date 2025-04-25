@@ -1,5 +1,4 @@
 export const getBackdropUrl = (path) => {
-  console.log(path);
   if (!path) {
     return "/assets/images/image_not_found.jpg";
   } else {
