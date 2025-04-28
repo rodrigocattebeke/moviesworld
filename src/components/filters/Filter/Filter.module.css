@@ -1,4 +1,26 @@
+.dropdownMenu {
+  background-color: var(--background-color-tertiary);
+}
+
+.dropdownMenu p {
+  color: var(--font-primary-color);
+  cursor: pointer;
+}
+
+.filterTitleContainer,
+.filterSelectorContainer {
+  display: flex;
+  width: 100%;
+  gap: 0.4rem;
+}
+
+.filterSelectorContainer {
+  justify-content: space-between;
+  cursor: pointer;
+}
+
 .singleFilterContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,16 +37,4 @@
 
 .singleFilterContainer p {
   margin: 0;
-}
-
-.filterTitleContainer,
-.filterSelectorContainer {
-  display: flex;
-  width: 100%;
-  gap: 0.4rem;
-}
-
-.filterSelectorContainer {
-  justify-content: space-between;
-  cursor: pointer;
 }

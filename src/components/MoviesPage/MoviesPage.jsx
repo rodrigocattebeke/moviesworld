@@ -1,6 +1,5 @@
 "use client";
 
-import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
 import { useEffect, useState } from "react";
 import { MovieList } from "../movie/MovieList/MovieList";
 import { Loader } from "../Loader/Loader";
