@@ -1,22 +1,15 @@
+"use client";
 import sort from "@/assets/icons/sort.svg";
-import movie from "@/assets/icons/movie.svg";
 import arrowDropDown from "@/assets/icons/arrow_drop_down.svg";
 import styles from "./Filter.module.css";
 import Image from "next/image";
-import { useState } from "react";
-export const Filter = () => {
-  const [order, setOrder] = useState("desc");
-  const [genre, setGenre] = useState("");
+import { useEffect, useState } from "react";
+export const Filter = ({ initialOrder = "descendente", onOrderChange, availableOrders = ["descendente"] }) => {
+  const [order, setOrder] = useState(initialOrder);
 
-  const orderOptions = [
-    { title: "descendente", value: "desc" },
-    { title: "ascendente", value: "asc" },
-  ];
-
-  const genresOptions = [
-    { title: "Acción", value: "action" },
-    { title: "Suspenso", value: "suspense" },
-  ];
+  useEffect(() => {
+    onOrderChange(order);
+  }, [order]);
 
   return (
     <div className="container-xxl p-0 d-flex gap-3 flex-wrap">
@@ -30,27 +23,14 @@ export const Filter = () => {
           <Image src={arrowDropDown} alt="Flecha dropdown" />
         </div>
         <ul className={`${styles.dropdownMenu} dropdown-menu `}>
-          {orderOptions.map((order, i) => (
-            <li key={i} onClick={() => setOrder(order.value)}>
-              <p className="dropdown-item">{order.title}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className={`${styles.singleFilterContainer} dropdown`}>
-        <div className={styles.filterTitleContainer}>
-          <Image src={movie} alt="Géneros" />
-          <p>Géneros</p>
-        </div>
-        <div className={styles.filterSelectorContainer} data-bs-toggle="dropdown" aria-expanded="false">
-          <p>{genre}</p>
-          <Image src={arrowDropDown} alt="Flecha dropdown" />
-        </div>
-        <ul className={`${styles.dropdownMenu} dropdown-menu`}>
-          {genresOptions.map((genre, i) => (
-            <li onClick={() => setGenre(genre.value)} key={i}>
-              <p className="dropdown-item">{genre.title}</p>
+          {availableOrders.map((order, i) => (
+            <li
+              key={i}
+              onClick={() => {
+                setOrder(order);
+              }}
+            >
+              <p className="dropdown-item">{order}</p>
             </li>
           ))}
         </ul>
