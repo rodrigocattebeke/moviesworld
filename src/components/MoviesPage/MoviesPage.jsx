@@ -4,25 +4,25 @@ import { useEffect, useState } from "react";
 import { MovieList } from "../movie/MovieList/MovieList";
 import { Loader } from "../Loader/Loader";
 import { Filter } from "../filters/Filter/Filter";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export const MoviesPage = ({ title = "", url = undefined, initialPage = 1, section = undefined }) => {
+export const MoviesPage = ({ title = "", url = undefined, initialPage = 1, sectionFilter = undefined }) => {
   if (!url) return console.error("Debes de especificar una url de la api para obtener las peliculas.");
-  if (!section) return console.error("Se debe de especificar la sección visitada. Secciones validas: top_rated, popular");
+  if (!sectionFilter) return console.error("Se debe de especificar el filtro de la sección. Filtros validos: popularity");
 
   const navigation = useRouter();
   const searchParams = useSearchParams();
   const initialOrder = searchParams.get("orden") || "descendente";
 
   const orderOptions = {
-    ascendente: "popularity.asc",
-    descendente: "popularity.desc",
+    ascendente: `${sectionFilter}.asc`,
+    descendente: `${sectionFilter}.desc`,
   };
 
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(initialPage);
-  const [orderSelected, setOrderSelected] = useState(orderOptions[initialOrder] || "popularity.desc");
+  const [orderSelected, setOrderSelected] = useState(orderOptions[initialOrder] || `${sectionFilter}.desc`);
 
   useEffect(() => {
     const getResults = async () => {
