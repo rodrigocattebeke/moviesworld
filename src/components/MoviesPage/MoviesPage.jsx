@@ -1,28 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MovieList } from "../movie/MovieList/MovieList";
 import { Loader } from "../Loader/Loader";
 import { Filter } from "../filters/Filter/Filter";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const MoviesPage = ({ title = "", url = undefined, initialPage = 1, sectionFilter = undefined }) => {
+export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefined }) => {
   if (!url) return console.error("Debes de especificar una url de la api para obtener las peliculas.");
   if (!sectionFilter) return console.error("Se debe de especificar el filtro de la sección. Filtros validos: popularity");
-
-  const navigation = useRouter();
-  const searchParams = useSearchParams();
-  const initialOrder = searchParams.get("orden") || "descendente";
 
   const orderOptions = {
     ascendente: `${sectionFilter}.asc`,
     descendente: `${sectionFilter}.desc`,
   };
 
+  const navigation = useRouter();
+  const searchParams = useSearchParams();
+  const initialOrder = searchParams.get("orden") || "descendente";
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(initialPage);
+  const [page, setPage] = useState(1);
   const [orderSelected, setOrderSelected] = useState(orderOptions[initialOrder] || `${sectionFilter}.desc`);
+  const observerRef = useRef(null);
+
+  //Observer config
+  const options = {
+    threshold: "0.1",
+  };
+  const callback = (entries) => {
+    console.log(entries[0].isIntersecting);
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+
+  useEffect(() => {
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+  }, [results]);
+
+  //Get movies
 
   useEffect(() => {
     const getResults = async () => {
@@ -40,6 +58,8 @@ export const MoviesPage = ({ title = "", url = undefined, initialPage = 1, secti
     getResults();
   }, [url, searchParams.toString()]);
 
+  //On order change
+
   const onOrderChange = (order) => {
     navigation.push(`?orden=${order}`);
     setOrderSelected(orderOptions[order]);
@@ -52,7 +72,18 @@ export const MoviesPage = ({ title = "", url = undefined, initialPage = 1, secti
         <Filter initialOrder={initialOrder} onOrderChange={onOrderChange} availableOrders={Object.keys(orderOptions)} />
       </div>
       <div className="container" style={{ minHeight: "85vh" }}>
-        {isLoading ? <Loader /> : !results || results.length == 0 ? <p>No se encontraron resultados</p> : <MovieList movies={results} mode="search" />}
+        {isLoading ? (
+          <Loader />
+        ) : !results || results.length == 0 ? (
+          <p>No se encontraron resultados</p>
+        ) : (
+          <>
+            <MovieList movies={results} mode="search" />
+            <div ref={observerRef} style={{ marginTop: "1.5rem" }}>
+              <Loader />
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
