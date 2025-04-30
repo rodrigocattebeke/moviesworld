@@ -12,7 +12,7 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
             </Link>
 
             <ul className="dropdown-menu">
-              <li>
+              {/* <li>
                 <Link className="dropdown-item" href="#">
                   Lo mas popular
                 </Link>
@@ -30,6 +30,11 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
               <li>
                 <Link className="dropdown-item" href="#">
                   Lo más nuevo
+                </Link>
+              </li> */}
+              <li>
+                <Link className="dropdown-item" href="#">
+                  Próximamente...
                 </Link>
               </li>
             </ul>
@@ -43,27 +48,17 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
 
             <ul className="dropdown-menu">
               <li>
-                <Link className="dropdown-item" href="#">
+                <Link className="dropdown-item" href="/peliculas/populares">
                   Lo mas popular
                 </Link>
               </li>
               <li>
-                <Link className="dropdown-item" href="#">
-                  Destacados
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#">
-                  Categorias
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#">
-                  Lo más nuevo
+                <Link className="dropdown-item" href="/peliculas/mejores_valoradas">
+                  Mejores valorados
                 </Link>
               </li>
             </ul>
-          </div>{" "}
+          </div>
         </li>
         <li>
           <Link href="#" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
