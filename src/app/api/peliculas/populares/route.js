@@ -2,10 +2,15 @@ import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
-  const params = new URLSearchParams(searchParams).toString();
+  const params = new URLSearchParams(searchParams);
+
+  const paramsObject = {
+    page: params.get("page") || 1,
+    sort_by: params.get("sort_by") || "popularity.desc",
+  };
+
   try {
-    ("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=es-ES&page=1&sort_by=popularity.desc&without_genres=Action");
-    const res = await fetchFromTMDB("/discover/movie", `${params}`);
+    const res = await fetchFromTMDB("/discover/movie", `${new URLSearchParams(paramsObject).toString()}`);
     return Response.json(res, { status: 200 });
   } catch (error) {
     return Response.json({ error: error.message || "Ocurrio un error en el servidor" }, { status: 500 });
