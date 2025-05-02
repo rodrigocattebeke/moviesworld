@@ -15,10 +15,14 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
     descendente: `${sectionFilter}.desc`,
   };
 
+  useEffect(() => {
+    console.log("montando");
+  }, []);
+
   const navigation = useRouter();
   const searchParams = useSearchParams();
   const initialOrder = searchParams.get("orden") || "descendente";
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [orderSelected, setOrderSelected] = useState(orderOptions[initialOrder] || `${sectionFilter}.desc`);
@@ -29,7 +33,9 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
     threshold: "0.1",
   };
   const callback = (entries) => {
-    console.log(entries[0].isIntersecting);
+    if (entries[0].isIntersecting) {
+      setPage((prevPage) => prevPage + 1);
+    }
   };
 
   const observer = new IntersectionObserver(callback, options);
@@ -43,11 +49,12 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
   //Get movies
 
   useEffect(() => {
+    console.log("try catch " + page);
     const getResults = async () => {
       try {
         const res = await fetch(`${url}?page=${page}&sort_by=${orderSelected}`);
         const data = await res.json();
-        setResults(data.results);
+        setResults([...results, ...data.results]);
       } catch (error) {
         console.error(error);
         setResults(null);
@@ -56,7 +63,7 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
       }
     };
     getResults();
-  }, [url, searchParams.toString()]);
+  }, [searchParams.toString(), page]);
 
   //On order change
 
