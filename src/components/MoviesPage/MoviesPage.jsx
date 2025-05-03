@@ -38,9 +38,8 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
     }
   };
 
-  const observer = new IntersectionObserver(callback, options);
-
   useEffect(() => {
+    const observer = new IntersectionObserver(callback, options);
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
