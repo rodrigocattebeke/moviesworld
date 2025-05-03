@@ -49,7 +49,6 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
   //Get movies
 
   useEffect(() => {
-    console.log("try catch " + page);
     const getResults = async () => {
       try {
         const res = await fetch(`${url}?page=${page}&sort_by=${orderSelected}`);
