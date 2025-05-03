@@ -37,6 +37,12 @@
   max-height: 400px;
 }
 
+.movieInformation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .posterImage {
   border-radius: 0.3rem;
 }

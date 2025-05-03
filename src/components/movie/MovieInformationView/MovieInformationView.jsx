@@ -6,6 +6,7 @@ import { getPosterUrl } from "@/utils/getPosterUrl";
 import styles from "./MovieInformation.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import { MovieRate } from "./MovieRate/MovieRate";
 
 export const MovieInformationView = ({ movie = {} }) => {
   if (Object.keys(movie).length == 0) return console.error("El objeto pasado está vacío.");
@@ -34,15 +35,14 @@ export const MovieInformationView = ({ movie = {} }) => {
               <h2>{movie.title}</h2>
               <small>Producido por compañia1 y compañia2</small>
             </div>
-
             <div className={styles.movieInformation}>
               <div className={`d-flex gap-2 justify-content-center justify-content-sm-start`}>
                 <small>{movie.release_date.split("-")[0]}</small>
                 <small>{movie.runtime}min</small>
                 <small>{movie.genres.map((g) => g.name).join(", ")}</small>
               </div>
-              <div className={styles.votes}>
-                <p className="m-0">votos</p>
+              <div className={"d-flex justify-content-center justify-content-sm-start"}>
+                <MovieRate rate={movie.vote_average} totalVotes={movie.vote_count} />
               </div>
             </div>
 
