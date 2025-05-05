@@ -19,6 +19,7 @@ export const MovieInformationView = ({ movie = {} }) => {
 
   const moviePoster = getPosterUrl(movie.poster_path);
   const movieBackdrop = getBackdropUrl(movie.backdrop_path);
+  const prodCompaniesString = movie.production_companies ? movie.production_companies.map((comp) => comp.name).join(", ") : undefined;
 
   return (
     <section className="container-xl py-4 position-relative">
@@ -33,19 +34,18 @@ export const MovieInformationView = ({ movie = {} }) => {
           <div className="col-12 col-sm-8 d-flex flex-column gap-3">
             <div className={`${styles.movieHeader}  text-center text-sm-start`}>
               <h2>{movie.title}</h2>
-              <small>Producido por compañia1 y compañia2</small>
+              {prodCompaniesString ? <small>Producido por: {prodCompaniesString} </small> : ""}
             </div>
             <div className={styles.movieInformation}>
               <div className={`d-flex gap-2 justify-content-center justify-content-sm-start`}>
-                <small>{movie.release_date.split("-")[0]}</small>
-                <small>{movie.runtime}min</small>
-                <small>{movie.genres.map((g) => g.name).join(", ")}</small>
+                <p>{movie.release_date.split("-")[0]}</p>
+                <p>{movie.runtime}min</p>
+                <p>{movie.genres.map((g) => g.name).join(", ")}</p>
               </div>
               <div className={"d-flex justify-content-center justify-content-sm-start"}>
                 <MovieRate rate={movie.vote_average} totalVotes={movie.vote_count} />
               </div>
             </div>
-
             <div className={styles.movieDescription}>
               <p className={`${styles.overview} ${showMore ? styles.active : ""}`}>{movie.overview}</p>
               <p className={styles.showMore} onClick={handleShowClick}>

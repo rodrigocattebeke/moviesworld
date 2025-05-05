@@ -40,7 +40,11 @@
 .movieInformation {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
+}
+
+.movieInformation p {
+  margin: 0;
 }
 
 .posterImage {
