@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: start;
   width: 100%;
-  max-width: 7rem;
+  max-width: 6rem;
 }
 
 .movieVote {
@@ -23,7 +23,7 @@
 
 .movieVote p {
   line-height: 1;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: bold;
   margin: 0;
   color: var(--primary-color);
