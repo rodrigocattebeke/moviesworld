@@ -15,10 +15,6 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
     descendente: `${sectionFilter}.desc`,
   };
 
-  useEffect(() => {
-    console.log("montando");
-  }, []);
-
   const navigation = useRouter();
   const searchParams = useSearchParams();
   const initialOrder = searchParams.get("orden") || "descendente";
