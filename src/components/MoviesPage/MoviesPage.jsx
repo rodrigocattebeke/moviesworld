@@ -21,6 +21,7 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [orderSelected, setOrderSelected] = useState(orderOptions[initialOrder] || `${sectionFilter}.desc`);
   const observerRef = useRef(null);
 
@@ -49,6 +50,7 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
         const res = await fetch(`${url}?page=${page}&sort_by=${orderSelected}`);
         const data = await res.json();
         setResults([...results, ...data.results]);
+        setTotalPages(data.total_pages);
       } catch (error) {
         console.error(error);
         setResults(null);
@@ -80,9 +82,14 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
         ) : (
           <>
             <MovieList movies={results} mode="search" />
-            <div ref={observerRef} style={{ marginTop: "1.5rem" }}>
-              <Loader />
-            </div>
+            {/* If the total pages is more than 1, show loader with observer for infinite scroll */}
+            {totalPages > 1 ? (
+              <div className="mt-3" ref={observerRef}>
+                <Loader />
+              </div>
+            ) : (
+              ""
+            )}
           </>
         )}
       </div>
