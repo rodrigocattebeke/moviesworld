@@ -1,14 +1,18 @@
 "use client";
 
-import { notFound, useSearchParams } from "next/navigation";
 import styles from "./buscar.module.css";
+import videoSettingsIcon from "@/assets/icons/video_settings.svg";
+import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { MovieList } from "@/components/movie/MovieList/MovieList";
 import { Loader } from "@/components/Loader/Loader";
+import { Filter } from "@/components/filters/Filter/Filter";
 
 export default function Buscar() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [query, setQuery] = useState(searchParams.get("q"));
+  const [type, setType] = useState(searchParams.get("type") || "peliculas");
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -17,18 +21,26 @@ export default function Buscar() {
 
   if (!query) return notFound();
 
+  //Searchs types
+  const searchTypes = {
+    peliculas: "movies",
+    series: "tv",
+  };
+
   //Get the new query when it is change, and clear the results state
   useEffect(() => {
     const newQuery = searchParams.get("q");
+    const newType = searchParams.get("type");
     setQuery(newQuery);
+    setType(newType);
     setResults([]);
     setIsLoading(true);
-  }, [searchParams.get("q")]);
+  }, [searchParams.toString()]);
 
   useEffect(() => {
     const getResults = async () => {
       try {
-        const res = await fetch(`/api/buscar?q=${query}&page=${page}`);
+        const res = await fetch(`/api/buscar?q=${query}&page=${page}?type=${searchTypes[type]}`);
         const results = await res.json();
         setResults((prevResults) => [...prevResults, ...results.results]);
         setTotalPages(results.total_pages);
@@ -40,7 +52,7 @@ export default function Buscar() {
       }
     };
     getResults();
-  }, [query, page]);
+  }, [query, page, type]);
 
   //Observer config
   const options = {
@@ -61,6 +73,14 @@ export default function Buscar() {
     }
   }, [results]);
 
+  //On search type change
+  const onTypeChange = (type) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("type", type);
+    router.push(`?${params.toString()}`);
+    setIsLoading();
+  };
+
   return (
     <section className={`container position-relative mt-3`}>
       <div className={styles.container}>
@@ -69,6 +89,7 @@ export default function Buscar() {
         </div>
       </div>
       <div className={`${styles.resultsContainer} container`}>
+        <Filter title="Tipo" icon={videoSettingsIcon} onFilterChange={onTypeChange} availableFilters={Object.keys(searchTypes)} />
         {isLoading ? (
           <Loader />
         ) : !results ? (
