@@ -7,6 +7,7 @@ export async function GET(req) {
   const paramsObject = {
     page: params.get("page") || 1,
     sort_by: params.get("sort_by") || "vote_average.desc",
+    include_adult: "true",
   };
 
   try {
