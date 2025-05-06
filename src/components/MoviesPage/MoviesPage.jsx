@@ -5,14 +5,15 @@ import { MovieList } from "../movie/MovieList/MovieList";
 import { Loader } from "../Loader/Loader";
 import { Filter } from "../filters/Filter/Filter";
 import { useRouter, useSearchParams } from "next/navigation";
+import sort from "@/assets/icons/sort.svg";
 
 export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefined }) => {
   if (!url) return console.error("Debes de especificar una url de la api para obtener las peliculas.");
   if (!sectionFilter) return console.error("Se debe de especificar el filtro de la sección. Filtros validos: popularity");
 
   const orderOptions = {
-    ascendente: `${sectionFilter}.asc`,
     descendente: `${sectionFilter}.desc`,
+    ascendente: `${sectionFilter}.asc`,
   };
 
   const navigation = useRouter();
@@ -61,18 +62,21 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
     getResults();
   }, [searchParams.toString(), page]);
 
-  //On order change
+  //On order change, push the query in the url and reset states
 
   const onOrderChange = (order) => {
     navigation.push(`?orden=${order}`);
     setOrderSelected(orderOptions[order]);
+    setPage(1);
+    setResults([]);
+    setIsLoading(true);
   };
 
   return (
     <section className="container-xxl">
       <h3>{title}</h3>
       <div className="container-xxl">
-        <Filter initialOrder={initialOrder} onOrderChange={onOrderChange} availableOrders={Object.keys(orderOptions)} />
+        <Filter title="Orden" icon={sort} onFilterChange={onOrderChange} availableFilters={Object.keys(orderOptions)} />
       </div>
       <div className="container" style={{ minHeight: "85vh" }}>
         {isLoading ? (

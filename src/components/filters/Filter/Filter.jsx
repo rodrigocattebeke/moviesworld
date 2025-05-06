@@ -1,36 +1,35 @@
 "use client";
-import sort from "@/assets/icons/sort.svg";
 import arrowDropDown from "@/assets/icons/arrow_drop_down.svg";
 import styles from "./Filter.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-export const Filter = ({ initialOrder = "descendente", onOrderChange, availableOrders = ["descendente"] }) => {
-  const [order, setOrder] = useState(initialOrder);
+export const Filter = ({ title = "", icon = undefined, onFilterChange, availableFilters = [""] }) => {
+  const [filter, setFilter] = useState(availableFilters[0]);
 
   useEffect(() => {
-    onOrderChange(order);
-  }, [order]);
+    onFilterChange(filter);
+  }, [filter]);
 
   return (
     <div className="container-xxl p-0 d-flex gap-3 flex-wrap">
       <div className={`${styles.singleFilterContainer}`}>
         <div className={styles.filterTitleContainer}>
-          <Image src={sort} alt="Orden" />
-          <p>Orden</p>
+          {icon ? <Image src={icon} alt={title} /> : ""}
+          <p>{title}</p>
         </div>
         <div className={styles.filterSelectorContainer} data-bs-toggle="dropdown" aria-expanded="false">
-          <p>{order}</p>
+          <p>{filter}</p>
           <Image src={arrowDropDown} alt="Flecha dropdown" />
         </div>
         <ul className={`${styles.dropdownMenu} dropdown-menu `}>
-          {availableOrders.map((order, i) => (
+          {availableFilters.map((filter, i) => (
             <li
               key={i}
               onClick={() => {
-                setOrder(order);
+                setFilter(filter);
               }}
             >
-              <p className="dropdown-item">{order}</p>
+              <p className="dropdown-item">{filter}</p>
             </li>
           ))}
         </ul>
