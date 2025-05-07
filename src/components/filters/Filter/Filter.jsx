@@ -3,12 +3,12 @@ import arrowDropDown from "@/assets/icons/arrow_drop_down.svg";
 import styles from "./Filter.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-export const Filter = ({ title = "", icon = undefined, onFilterChange, availableFilters = [""] }) => {
-  const [filter, setFilter] = useState(availableFilters[0]);
+export const Filter = ({ title = "", icon = undefined, onFilterChange, availableFilters = [""], selected = undefined }) => {
+  const [filterSelected, setSelectedFilter] = useState(selected || availableFilters[0]);
 
   useEffect(() => {
-    onFilterChange(filter);
-  }, [filter]);
+    onFilterChange(filterSelected);
+  }, [filterSelected]);
 
   return (
     <div className="container-xxl p-0 d-flex gap-3 flex-wrap">
@@ -18,7 +18,7 @@ export const Filter = ({ title = "", icon = undefined, onFilterChange, available
           <p>{title}</p>
         </div>
         <div className={styles.filterSelectorContainer} data-bs-toggle="dropdown" aria-expanded="false">
-          <p>{filter}</p>
+          <p>{filterSelected}</p>
           <Image src={arrowDropDown} alt="Flecha dropdown" />
         </div>
         <ul className={`${styles.dropdownMenu} dropdown-menu `}>
@@ -26,7 +26,7 @@ export const Filter = ({ title = "", icon = undefined, onFilterChange, available
             <li
               key={i}
               onClick={() => {
-                setFilter(filter);
+                setSelectedFilter(filter);
               }}
             >
               <p className="dropdown-item">{filter}</p>

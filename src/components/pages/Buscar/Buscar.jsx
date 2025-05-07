@@ -1,5 +1,4 @@
 "use client";
-
 import styles from "./buscar.module.css";
 import videoSettingsIcon from "@/assets/icons/video_settings.svg";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
@@ -23,24 +22,25 @@ export default function Buscar() {
 
   //Searchs types
   const searchTypes = {
-    peliculas: "movies",
+    peliculas: "movie",
     series: "tv",
   };
 
   //Get the new query when it is change, and clear the results state
   useEffect(() => {
     const newQuery = searchParams.get("q");
-    const newType = searchParams.get("type");
+    const newType = searchParams.get("type") || "peliculas";
     setQuery(newQuery);
     setType(newType);
     setResults([]);
     setIsLoading(true);
+    setPage(1);
   }, [searchParams.toString()]);
 
   useEffect(() => {
     const getResults = async () => {
       try {
-        const res = await fetch(`/api/buscar?q=${query}&page=${page}?type=${searchTypes[type]}`);
+        const res = await fetch(`/api/buscar?q=${query}&page=${page}&type=${searchTypes[type]}`);
         const results = await res.json();
         setResults((prevResults) => [...prevResults, ...results.results]);
         setTotalPages(results.total_pages);
@@ -78,9 +78,7 @@ export default function Buscar() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("type", type);
     router.push(`?${params.toString()}`);
-    setIsLoading();
   };
-
   return (
     <section className={`container position-relative mt-3`}>
       <div className={styles.container}>
@@ -89,14 +87,14 @@ export default function Buscar() {
         </div>
       </div>
       <div className={`${styles.resultsContainer} container`}>
-        <Filter title="Tipo" icon={videoSettingsIcon} onFilterChange={onTypeChange} availableFilters={Object.keys(searchTypes)} />
+        <Filter title="Tipo" icon={videoSettingsIcon} onFilterChange={onTypeChange} availableFilters={Object.keys(searchTypes)} selected={type} />
         {isLoading ? (
           <Loader />
         ) : !results ? (
           <h3>Ocurrio un error al hacer la búsqueda.</h3>
         ) : (
           <>
-            <MovieList movies={results} mode="search" />
+            <MovieList movies={results} mode="search" type={type} />
             {/* If the total pages is more than 1, show loader with observer for infinite scroll */}
             {totalPages > 1 ? (
               <div className="mt-3" ref={observerRef}>
