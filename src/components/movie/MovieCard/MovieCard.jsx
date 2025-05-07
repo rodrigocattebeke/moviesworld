@@ -7,7 +7,7 @@ import Link from "next/link";
 import { titleToSlug } from "@/utils/titleToSlug";
 
 export const MovieCard = ({ movie = undefined, mode = "" }) => {
-  if (!movie) return console.error("Se debe de pasar una pelicula.");
+  if (!movie) return console.error("Se debe de pasar una pelicula o serie.");
 
   const imageUrl = getPosterUrl(movie.poster_path);
   const slug = titleToSlug(movie.title);
