@@ -6,14 +6,15 @@ import { getPosterUrl } from "@/utils/getPosterUrl";
 import Link from "next/link";
 import { titleToSlug } from "@/utils/titleToSlug";
 
-export const MovieCard = ({ movie = undefined, mode = "" }) => {
+export const MovieCard = ({ movie = undefined, mode = "", type = undefined }) => {
   if (!movie) return console.error("Se debe de pasar una pelicula o serie.");
-
+  console.log(type);
   const imageUrl = getPosterUrl(movie.poster_path);
   const slug = titleToSlug(movie.title);
+  const url = `/${type == "series" ? "serie" : "pelicula"}/${slug}-${movie.id}`;
 
   return (
-    <Link href={`/pelicula/${slug}-${movie.id}`}>
+    <Link href={url}>
       <div className={`${styles.cardContainer} ${mode == "search" ? styles.searchResultCard : ""}`}>
         <div className={`${styles.cardImgContainer}`}>
           <Image src={imageUrl} width={150} height={225} alt={`Poster de la película ${movie.title}`} sizes="(max-width: 380px) 80vw, (max-width: 540px) 45vw, (max-width:750px) 33vw, (max-width: 940px) 24vw, (max-width: 1200px) 20vw, 15vw" />

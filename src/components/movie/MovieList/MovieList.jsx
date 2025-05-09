@@ -20,7 +20,7 @@ export const MovieList = ({ movies = [], mode = "", type = undefined }) => {
     <section className={`${styles.moviesContainer} container-xl`}>
       {movies.map((movie, i) => {
         const media = normalizeMedia(movie, type);
-        return <MovieCard movie={media} mode={mode} key={i} />;
+        return <MovieCard movie={media} mode={mode} key={i} type={type} />;
       })}
     </section>
   );
