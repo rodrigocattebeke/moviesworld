@@ -5,6 +5,7 @@ import { getPosterUrl } from "@/utils/getPosterUrl";
 import styles from "./SerieInformationView.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import { Rate } from "@/components/Rate/Rate";
 
 export const SerieInformationView = ({ serie = {} }) => {
   if (Object.keys(serie).length == 0) return console.error("El objeto pasado está vacío.");
@@ -36,9 +37,11 @@ export const SerieInformationView = ({ serie = {} }) => {
             </div>
             <div className={styles.serieInformation}>
               <div className={`d-flex gap-2 justify-content-center justify-content-sm-start`}>
-                <p>{serie.genres.map((g) => g.name).join(", ")}</p>
+                <p>Géneros{serie.genres.map((g) => g.name).join(", ")}</p>
               </div>
-              <div className={"d-flex justify-content-center justify-content-sm-start"}>{/* <MovieRate rate={serie.vote_average} totalVotes={serie.vote_count} /> */}</div>
+              <div className={"d-flex justify-content-center justify-content-sm-start"}>
+                <Rate rate={serie.vote_average} totalVotes={serie.vote_count} />
+              </div>
             </div>
             <div className={styles.serieDescription}>
               <p className={`${styles.overview} ${showMore ? styles.active : ""}`}>{serie.overview}</p>
