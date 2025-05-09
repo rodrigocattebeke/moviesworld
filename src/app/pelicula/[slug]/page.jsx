@@ -1,6 +1,6 @@
 "use client";
 
-import { notFound, useParams, useSearchParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
 import { Loader } from "@/components/Loader/Loader";
