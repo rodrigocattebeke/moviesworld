@@ -1,4 +1,4 @@
-.movieRate {
+.Rate {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   gap: 0.2rem;
 }
 
-.movieStars {
+.starsContainer {
   position: relative;
   display: flex;
   align-items: center;
@@ -15,13 +15,13 @@
   max-width: 6rem;
 }
 
-.movieVote {
+.vote {
   display: flex;
   justify-content: end;
   height: min-content;
 }
 
-.movieVote p {
+.vote p {
   line-height: 1;
   font-size: 1.25rem;
   font-weight: bold;

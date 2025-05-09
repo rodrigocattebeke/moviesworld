@@ -1,19 +1,19 @@
 import { Star } from "@/components/icons/Star";
 import { StarFilled } from "@/components/icons/StarFilled";
-import styles from "./MovieRate.module.css";
-export const MovieRate = ({ rate = 10, totalVotes = 1 }) => {
+import styles from "./Rate.module.css";
+export const Rate = ({ rate = 10, totalVotes = 1 }) => {
   if (typeof rate !== "number") return console.warn("Solo se aceptan números.");
-  if (rate > 10) return console.warn("La valoracion máxima por pelicula es de 10.");
+  if (rate > 10) return console.warn("La valoracion máxima es de 10.");
 
   const pathPercentage = ((10 - rate) * 10).toFixed(2); //multiply with 10 for get the percentage
 
   return (
     <div className={styles.votesContainer}>
-      <div className={`${styles.movieRate}`}>
-        <div className={`${styles.movieVote}`}>
+      <div className={`${styles.Rate}`}>
+        <div className={`${styles.vote}`}>
           <p>{rate.toFixed(1)}</p>
         </div>
-        <div className={`${styles.movieStars}`}>
+        <div className={`${styles.starsContainer}`}>
           <div
             className={`${styles.starsFilled}`}
             style={{
