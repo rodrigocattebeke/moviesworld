@@ -5,13 +5,15 @@ export const Rate = ({ rate = 10, totalVotes = 1 }) => {
   if (typeof rate !== "number") return console.warn("Solo se aceptan números.");
   if (rate > 10) return console.warn("La valoracion máxima es de 10.");
 
-  const pathPercentage = ((10 - rate) * 10).toFixed(2); //multiply with 10 for get the percentage
+  const normalizeRate = (rate / 2).toFixed(1); //divide by 2 to get the rate up to 5
+  const percentage = ((normalizeRate * 100) / 5).toFixed(1);
+  const pathPercentage = 100 - percentage; //Subtract the percentage from 100 since the clipPath outputs from right to left
 
   return (
     <div className={styles.votesContainer}>
       <div className={`${styles.Rate}`}>
         <div className={`${styles.vote}`}>
-          <p>{rate.toFixed(1)}</p>
+          <p>{normalizeRate}</p>
         </div>
         <div className={`${styles.starsContainer}`}>
           <div
