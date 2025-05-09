@@ -85,7 +85,7 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
           <p>No se encontraron resultados</p>
         ) : (
           <>
-            <MovieList movies={results} mode="search" />
+            <MovieList movies={results} mode="search" type={"peliculas"} />
             {/* If the total pages is more than 1, show loader with observer for infinite scroll */}
             {totalPages > 1 ? (
               <div className="mt-3" ref={observerRef}>
