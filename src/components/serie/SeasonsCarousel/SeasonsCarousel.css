@@ -1,0 +1,45 @@
+.slick-list {
+  padding: 0 2.2rem;
+}
+
+.nextArrow,
+.prevArrow {
+  display: flex !important;
+  align-items: center;
+  width: 3rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--background-color-primary);
+  z-index: 99;
+}
+
+.nextArrow {
+  right: -1.1rem;
+  justify-content: start;
+  padding-left: 0.7rem;
+}
+
+.prevArrow {
+  left: -1.1rem;
+  justify-content: end;
+  padding-right: 0.7rem;
+}
+
+.nextArrow:hover,
+.prevArrow:hover {
+  background-color: var(--background-color-primary);
+}
+
+.prevArrow::before,
+.nextArrow::before {
+  content: "";
+}
+
+.prevArrow svg {
+  position: relative;
+  right: -0.2rem;
+}
+
+.title {
+  margin-bottom: 2rem;
+}
