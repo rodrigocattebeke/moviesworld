@@ -1,7 +1,7 @@
 import { Star } from "@/components/icons/Star";
 import { StarFilled } from "@/components/icons/StarFilled";
 import styles from "./Rate.module.css";
-export const Rate = ({ rate = 10, totalVotes = 1 }) => {
+export const Rate = ({ rate = 10, totalVotes = 1, showVotes = true }) => {
   if (typeof rate !== "number") return console.warn("Solo se aceptan números.");
   if (rate > 10) return console.warn("La valoracion máxima es de 10.");
 
@@ -37,7 +37,7 @@ export const Rate = ({ rate = 10, totalVotes = 1 }) => {
           </div>
         </div>
       </div>
-      <p className="m-0">{totalVotes} votos</p>
+      {showVotes ? <p className="m-0">{totalVotes} votos</p> : ""}
     </div>
   );
 };
