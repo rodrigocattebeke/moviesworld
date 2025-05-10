@@ -3,8 +3,8 @@
 import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader } from "@/components/Loader/Loader";
-import { MovieCarousel } from "@/components/movie/MovieCarousel/MovieCarousel";
 import { SerieInformationView } from "@/components/serie/SerieInformationView/SerieInformationView";
+import { SeasonsCarousel } from "@/components/serie/SeasonsCarousel/SeasonsCarousel";
 
 export default function Serie() {
   const { slug } = useParams();
@@ -42,6 +42,7 @@ export default function Serie() {
       ) : (
         <>
           <SerieInformationView serie={serie} />
+          <SeasonsCarousel seasons={serie.seasons} />
           {/* <MovieCarousel title={"Recomendaciones"} route="peliculas/populares" /> */}
         </>
       )}
