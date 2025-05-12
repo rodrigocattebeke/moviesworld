@@ -6,9 +6,9 @@ import { getPosterUrl } from "@/utils/getPosterUrl";
 import Link from "next/link";
 import { titleToSlug } from "@/utils/titleToSlug";
 
-export const MovieCard = ({ movie = undefined, mode = "", type = undefined }) => {
+export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
   if (!movie) return console.error("Se debe de pasar una pelicula o serie.");
-  console.log(type);
+  if (!type) return console.error("Se debe de pasar un tipo. Disponibles: Series, Peliculas");
   const imageUrl = getPosterUrl(movie.poster_path);
   const slug = titleToSlug(movie.title);
   const url = `/${type == "series" ? "serie" : "pelicula"}/${slug}-${movie.id}`;
