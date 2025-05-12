@@ -1,5 +1,5 @@
 import { Hero } from "@/components/Hero/Hero";
-import { MovieCarousel } from "@/components/movie/MovieCarousel/MovieCarousel";
+import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
 
 export default async function Home() {
   try {
@@ -13,8 +13,9 @@ export default async function Home() {
         {console.log(populares)}
         <>
           <Hero />
-          <MovieCarousel title="Peliculas populares" contentList={populares.results} type={"peliculas"} />
-          <MovieCarousel title="Mejores valoradas" contentList={mejores.results} type={"peliculas"} />
+
+          <ContentCarousel title="Peliculas populares" contentList={populares.results} type={"peliculas"} />
+          <ContentCarousel title="Mejores valoradas" contentList={mejores.results} type={"peliculas"} />
         </>
       </>
     );

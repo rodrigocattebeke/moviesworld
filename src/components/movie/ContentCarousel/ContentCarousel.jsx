@@ -3,9 +3,9 @@ import Slider from "react-slick";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
-import styles from "./MovieCarousel.module.css";
+import styles from "./ContentCarousel.module.css";
 
-export const MovieCarousel = ({ title = undefined, contentList = undefined, type = undefined }) => {
+export const ContentCarousel = ({ title = undefined, contentList = undefined, type = undefined }) => {
   if (!contentList) return console.error("Se debe de pasar la lista de elementos para el carousel.");
   if (!type) return console.error("Se debe de pasar un tipo. Disponibles: Series, Peliculas");
 
