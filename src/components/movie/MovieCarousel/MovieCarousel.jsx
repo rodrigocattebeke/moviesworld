@@ -4,29 +4,10 @@ import { MovieCard } from "../MovieCard/MovieCard";
 import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
 import styles from "./MovieCarousel.module.css";
-import { useEffect, useState } from "react";
-import { Loader } from "@/components/Loader/Loader";
 
-export const MovieCarousel = ({ title = undefined, route = "peliculas/populares" }) => {
-  const [movies, setMovies] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function getMoviesTopRated() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`/api/${route}`);
-        const data = await res.json();
-        setMovies(data.results);
-      } catch (error) {
-        console.warn(error);
-        setMovies(null);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getMoviesTopRated();
-  }, []);
+export const MovieCarousel = ({ title = undefined, contentList = undefined, type = undefined }) => {
+  if (!contentList) return console.error("Se debe de pasar la lista de elementos para el carousel.");
+  if (!type) return console.error("Se debe de pasar un tipo. Disponibles: Series, Peliculas");
 
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -88,22 +69,16 @@ export const MovieCarousel = ({ title = undefined, route = "peliculas/populares"
     ],
   };
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <section className="container-xxl my-5 overflow-x-hidden">
-      {!movies ? (
-        <h3>Ocurrió un error al obtener los datos. Intente nuevamente más tarde.</h3>
-      ) : (
-        <>
-          {title ? <h2 className={`${styles.title}`}>{title}</h2> : ""}
-          <Slider {...settings}>
-            {movies.map((movie, i) => (
-              <MovieCard movie={movie} key={i} />
-            ))}
-          </Slider>
-        </>
-      )}
+      <>
+        {title ? <h2 className={`${styles.title}`}>{title}</h2> : ""}
+        <Slider {...settings}>
+          {contentList.map((content, i) => (
+            <MovieCard movie={content} key={i} type={type} />
+          ))}
+        </Slider>
+      </>
     </section>
   );
 };
