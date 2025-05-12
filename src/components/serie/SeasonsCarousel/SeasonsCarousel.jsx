@@ -45,11 +45,7 @@ export const SeasonsCarousel = ({ seasons = undefined }) => {
     <section className="container-xxl my-5 overflow-x-hidden">
       <>
         <h2 className={`title`}>Temporadas</h2>
-        <Slider {...settings}>
-          {seasons.map((season, i) => (
-            <SeasonCard season={season} />
-          ))}
-        </Slider>
+        <Slider {...settings}>{seasons.map((season, i) => (season.air_date ? <SeasonCard season={season} /> : ""))}</Slider>
       </>
     </section>
   );
