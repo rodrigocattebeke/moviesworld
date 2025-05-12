@@ -4,7 +4,6 @@ import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
 import { Loader } from "@/components/Loader/Loader";
-import { MovieCarousel } from "@/components/movie/MovieCarousel/MovieCarousel";
 
 export default function Pelicula() {
   const { slug } = useParams();
@@ -42,7 +41,6 @@ export default function Pelicula() {
       ) : (
         <>
           <MovieInformationView movie={movie} />
-          <MovieCarousel title={"Recomendaciones"} route="peliculas/populares" />
         </>
       )}
     </div>

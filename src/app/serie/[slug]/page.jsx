@@ -43,7 +43,6 @@ export default function Serie() {
         <>
           <SerieInformationView serie={serie} />
           <SeasonsCarousel seasons={serie.seasons} />
-          {/* <MovieCarousel title={"Recomendaciones"} route="peliculas/populares" /> */}
         </>
       )}
     </div>
