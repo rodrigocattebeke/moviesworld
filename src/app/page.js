@@ -10,10 +10,8 @@ export default async function Home() {
 
     return (
       <>
-        {console.log(populares)}
         <>
           <Hero />
-
           <ContentCarousel title="Peliculas populares" contentList={populares.results} type={"peliculas"} />
           <ContentCarousel title="Mejores valoradas" contentList={mejores.results} type={"peliculas"} />
         </>
