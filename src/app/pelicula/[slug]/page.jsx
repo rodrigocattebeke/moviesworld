@@ -1,7 +1,6 @@
 "use client";
 
 import { notFound, useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
 import { Loader } from "@/components/Loader/Loader";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
