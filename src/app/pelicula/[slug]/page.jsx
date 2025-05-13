@@ -4,43 +4,30 @@ import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
 import { Loader } from "@/components/Loader/Loader";
+import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
+import useFetch from "@/hooks/useFetch";
 
 export default function Pelicula() {
   const { slug } = useParams();
-  const [movie, setMovie] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const id_pelicula = slug.split("-").pop();
+
+  const { data: movie, isLoading: movieLoading } = useFetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
+  const { data: similar, isLoading: similarLoading } = useFetch(`/api/pelicula/similares/${id_pelicula}`);
 
   if (!slug) return notFound();
 
-  useEffect(() => {
-    const getResults = async () => {
-      setIsLoading(true);
-      try {
-        const id_pelicula = slug.split("-").pop();
-        const res = await fetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
-        const result = await res.json();
-        setMovie(result);
-      } catch (error) {
-        console.error(error);
-        setMovie(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getResults();
-  }, [slug]);
-
   return (
     <div className="container-xxl p-0" style={{ minHeight: "30vh" }}>
-      {isLoading ? (
+      {movieLoading || similarLoading ? (
         <div className="container mt-3">
           <Loader />
         </div>
-      ) : !movie ? (
+      ) : !movie || !similar ? (
         <h3>Ocurrio un error al cargar la película.</h3>
       ) : (
         <>
           <MovieInformationView movie={movie} />
+          <ContentCarousel title={"Recomendaciones"} contentList={similar.results} type={"peliculas"} />
         </>
       )}
     </div>
