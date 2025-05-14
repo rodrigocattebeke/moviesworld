@@ -22,7 +22,7 @@ export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
           <Image src={imageUrl} width={150} height={225} alt={`Poster de la película ${movie.title}`} sizes="(max-width: 380px) 80vw, (max-width: 540px) 45vw, (max-width:750px) 33vw, (max-width: 940px) 24vw, (max-width: 1200px) 20vw, 15vw" />
         </div>
         <div className={`${mode == "search" ? styles.hideMovieTitle : "d-none"}`}>
-          <p>{movie.title}</p>
+          <p>{title}</p>
         </div>
         <div className={`${styles.movieInfoContainer} ${mode == "search" ? "d-none" : ""}`}>
           <p className={`${styles.movieTitle}`}>{movie.title}</p>
