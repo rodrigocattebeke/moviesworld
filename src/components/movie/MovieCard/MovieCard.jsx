@@ -11,7 +11,6 @@ export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
   if (!type) return console.error("Se debe de pasar un tipo. Disponibles: Series, Peliculas");
   //Normalize
   const title = type == "series" ? movie.name : movie.title;
-  console.log(movie);
   const slug = titleToSlug(title);
   const url = `/${type == "series" ? "serie" : "pelicula"}/${slug}-${movie.id}`;
   const imageUrl = getPosterUrl(movie.poster_path);

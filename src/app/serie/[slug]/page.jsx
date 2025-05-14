@@ -24,7 +24,7 @@ export default function Serie() {
           <Loader />
         </div>
       ) : !serie || !similar ? (
-        <h3>Ocurrio un error al cargar la película.</h3>
+        <h3 className="my-4">Ocurrio un error al cargar la película.</h3>
       ) : (
         <>
           <SerieInformationView serie={serie} />
