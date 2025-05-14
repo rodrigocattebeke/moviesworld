@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function useFetch(url = undefined) {
   if (!url) console.error("Se debe de especificar la url para el fetch.");
@@ -9,6 +9,8 @@ export default function useFetch(url = undefined) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -18,26 +20,36 @@ export default function useFetch(url = undefined) {
       setIsError(false);
       setIsLoading(true);
       setIsSuccess(false);
+
+      setIsMounted(true);
+
       try {
         const res = await fetch(url, { signal: controller.signal });
         const data = await res.json();
-        setData(data);
-        setIsSuccess(true);
+        if (isMounted) {
+          setData(data);
+          setIsSuccess(true);
+        }
       } catch (error) {
-        console.error(error);
-        setIsError(true);
-        setError(error);
+        if (error.name !== "AbortError") {
+          console.log(error);
+          setIsError(true);
+          setError(error);
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
     fetchData();
 
-    // 🧹 Cleanup
+    // Cleanup
     return () => {
+      setIsMounted(false);
       controller.abort();
     };
-  }, [url]);
+  }, [url, isMounted]);
 
   return { data, error, isLoading, isError, isSuccess };
 }
