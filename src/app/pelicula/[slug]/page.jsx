@@ -11,22 +11,21 @@ export default function Pelicula() {
   const id_pelicula = slug.split("-").pop();
 
   const { data: movie, isLoading: movieLoading } = useFetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
-  const { data: similar, isLoading: similarLoading } = useFetch(`/api/pelicula/similares/${id_pelicula}`);
+  const { data: recomendation, isLoading: recomendationLoading } = useFetch(`/api/pelicula/recomendaciones/${id_pelicula}`);
 
   if (!slug) return notFound();
-
   return (
     <div className="container-xxl p-0" style={{ minHeight: "30vh" }}>
-      {movieLoading || similarLoading ? (
+      {movieLoading || recomendationLoading ? (
         <div className="container mt-3">
           <Loader />
         </div>
-      ) : !movie || !similar ? (
+      ) : !movie || !recomendation ? (
         <h3>Ocurrio un error al cargar la película.</h3>
       ) : (
         <>
           <MovieInformationView movie={movie} />
-          <ContentCarousel title={"Recomendaciones"} contentList={similar.results} type={"peliculas"} />
+          <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"peliculas"} />
         </>
       )}
     </div>
