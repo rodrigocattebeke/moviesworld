@@ -12,29 +12,14 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
             </Link>
 
             <ul className="dropdown-menu">
-              {/* <li>
-                <Link className="dropdown-item" href="#">
-                  Lo mas popular
+              <li>
+                <Link className="dropdown-item" href="/series/populares">
+                  Populares
                 </Link>
               </li>
               <li>
-                <Link className="dropdown-item" href="#">
-                  Destacados
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#">
-                  Categorias
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#">
-                  Lo más nuevo
-                </Link>
-              </li> */}
-              <li>
-                <Link className="dropdown-item" href="#">
-                  Próximamente...
+                <Link className="dropdown-item" href="/series/mejores_valoradas">
+                  Mejores valoradas
                 </Link>
               </li>
             </ul>
@@ -49,12 +34,12 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
             <ul className="dropdown-menu">
               <li>
                 <Link className="dropdown-item" href="/peliculas/populares">
-                  Lo mas popular
+                  Populares
                 </Link>
               </li>
               <li>
                 <Link className="dropdown-item" href="/peliculas/mejores_valoradas">
-                  Mejores valorados
+                  Mejores valoradas
                 </Link>
               </li>
             </ul>

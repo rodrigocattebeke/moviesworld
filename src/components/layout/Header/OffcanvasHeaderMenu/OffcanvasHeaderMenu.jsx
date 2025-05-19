@@ -39,31 +39,21 @@ export const OffcanvasHeaderMenu = () => {
               </li> */}
             </ul>
           </div>
-          {/* <div className="container">
+          <div className="container">
             <h4>Series</h4>
             <ul className={styles.headerUl}>
               <li>
-                <Link href="#" data-bs-dismiss="offcanvas">
-                  Lo más popular
+                <Link href="/series/populares" data-bs-dismiss="offcanvas">
+                  Populares
                 </Link>
               </li>
               <li>
-                <Link href="#" data-bs-dismiss="offcanvas">
+                <Link href="/series/mejores_valoradas" data-bs-dismiss="offcanvas">
                   Mejores valoradas
                 </Link>
               </li>
-              <li>
-                <Link href="#" data-bs-dismiss="offcanvas">
-                  Categorias
-                </Link>
-              </li>
-              <li>
-                <Link href="#" data-bs-dismiss="offcanvas">
-                  Lo más nuevo
-                </Link>
-              </li>
             </ul>
-          </div> */}
+          </div>
         </div>
       </div>
     </>
