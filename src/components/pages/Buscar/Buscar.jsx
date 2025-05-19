@@ -3,7 +3,7 @@ import styles from "./buscar.module.css";
 import videoSettingsIcon from "@/assets/icons/video_settings.svg";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { MovieList } from "@/components/movie/MovieList/MovieList";
+import { ContentList } from "@/components/ContentList/ContentList";
 import { Loader } from "@/components/Loader/Loader";
 import { Filter } from "@/components/filters/Filter/Filter";
 
@@ -94,7 +94,7 @@ export default function Buscar() {
           <h3>Ocurrio un error al hacer la búsqueda.</h3>
         ) : (
           <>
-            <MovieList movies={results} mode="search" type={type} />
+            <ContentList contentList={results} mode="search" type={type} />
             {/* If the total pages is more than 1, show loader with observer for infinite scroll */}
             {totalPages > 1 ? (
               <div className="mt-3" ref={observerRef}>
