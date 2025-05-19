@@ -7,7 +7,6 @@ import { Rate } from "@/components/Rate/Rate";
 export const SeasonCard = ({ season = undefined }) => {
   if (!season) return console.error("Se debe de pasar la temporada.");
   const imageUrl = getPosterUrl(season.poster_path);
-  console.log(season);
   return (
     <div className={`${styles.cardContainer}`}>
       <div className={`${styles.cardImgContainer}`}>

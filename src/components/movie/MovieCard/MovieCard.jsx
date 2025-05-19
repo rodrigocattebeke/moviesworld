@@ -14,12 +14,11 @@ export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
   const slug = titleToSlug(title);
   const url = `/${type == "series" ? "serie" : "pelicula"}/${slug}-${movie.id}`;
   const imageUrl = getPosterUrl(movie.poster_path);
-  console.log(title);
   return (
     <Link href={url}>
       <div className={`${styles.cardContainer} ${mode == "search" ? styles.searchResultCard : ""}`}>
         <div className={`${styles.cardImgContainer}`}>
-          <Image src={imageUrl} width={150} height={225} alt={`Poster de la película ${movie.title}`} sizes="(max-width: 380px) 80vw, (max-width: 540px) 45vw, (max-width:750px) 33vw, (max-width: 940px) 24vw, (max-width: 1200px) 20vw, 15vw" />
+          <Image src={imageUrl} width={150} height={225} alt={`Poster de la película ${title}`} sizes="(max-width: 380px) 80vw, (max-width: 540px) 45vw, (max-width:750px) 33vw, (max-width: 940px) 24vw, (max-width: 1200px) 20vw, 15vw" />
         </div>
         <div className={`${mode == "search" ? styles.hideMovieTitle : "d-none"}`}>
           <p>{title}</p>
