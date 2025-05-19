@@ -12,7 +12,6 @@ export default function Pelicula() {
 
   const { data: movie, isLoading: movieLoading } = useFetch(`/api/pelicula?id_pelicula=${id_pelicula}`);
   const { data: recomendation, isLoading: recomendationLoading } = useFetch(`/api/pelicula/recomendaciones/${id_pelicula}`);
-
   if (!slug) return notFound();
   return (
     <div className="container-xxl p-0" style={{ minHeight: "30vh" }}>
@@ -25,7 +24,7 @@ export default function Pelicula() {
       ) : (
         <>
           <MovieInformationView movie={movie} />
-          <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"peliculas"} />
+          {recomendation.results.length == 0 ? "" : <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"peliculas"} />}
         </>
       )}
     </div>

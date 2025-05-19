@@ -29,7 +29,7 @@ export default function Serie() {
         <>
           <SerieInformationView serie={serie} />
           <SeasonsCarousel seasons={serie.seasons} />
-          <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"series"} />
+          {recomendation.results.length == 0 ? "" : <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"series"} />}
         </>
       )}
     </div>
