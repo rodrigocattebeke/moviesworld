@@ -14,7 +14,7 @@ export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
   const slug = titleToSlug(title);
   const url = `/${type == "series" ? "serie" : "pelicula"}/${slug}-${movie.id}`;
   const imageUrl = getPosterUrl(movie.poster_path);
-
+  console.log(title);
   return (
     <Link href={url}>
       <div className={`${styles.cardContainer} ${mode == "search" ? styles.searchResultCard : ""}`}>
@@ -25,7 +25,7 @@ export const MovieCard = ({ movie = undefined, mode = "", type = null }) => {
           <p>{title}</p>
         </div>
         <div className={`${styles.movieInfoContainer} ${mode == "search" ? "d-none" : ""}`}>
-          <p className={`${styles.movieTitle}`}>{movie.title}</p>
+          <p className={`${styles.movieTitle}`}>{title}</p>
           <MovieRate rate={movie.vote_average} />
         </div>
       </div>
