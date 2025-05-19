@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MovieList } from "../movie/MovieList/MovieList";
 import { Loader } from "../Loader/Loader";
 import { Filter } from "../filters/Filter/Filter";
 import { useRouter, useSearchParams } from "next/navigation";
 import sort from "@/assets/icons/sort.svg";
+import { ContentList } from "@/components/ContentList/ContentList";
 
-export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefined }) => {
+export const ContentPage = ({ title = "", url = undefined, sectionFilter = undefined, type = undefined }) => {
   if (!url) return console.error("Debes de especificar una url de la api para obtener las peliculas.");
-  if (!sectionFilter) return console.error("Se debe de especificar el filtro de la sección. Filtros validos: popularity");
+  if (!sectionFilter) return console.error("Se debe de especificar el filtro de la sección. Filtros validos: popularity, vote_average");
+  if (!type) return console.error("Se debe de especificar el tipo de datos recibido. Válidos: peliculas, series");
 
   const orderOptions = {
     descendente: `${sectionFilter}.desc`,
@@ -85,7 +86,7 @@ export const MoviesPage = ({ title = "", url = undefined, sectionFilter = undefi
           <p>No se encontraron resultados</p>
         ) : (
           <>
-            <MovieList movies={results} mode="search" type={"peliculas"} />
+            <ContentList contentList={results} mode="search" type={type} />
             {/* If the total pages is more than 1, show loader with observer for infinite scroll */}
             {totalPages > 1 ? (
               <div className="mt-3" ref={observerRef}>
