@@ -1,5 +1,5 @@
-import { ContentPage } from "@/components/ContentPage/ContentPage";
 import { Loader } from "@/components/Loader/Loader";
+import { ContentPage } from "@/components/pages/ContentPage/ContentPage";
 import { Suspense } from "react";
 
 export default async function MejoresValoradas() {

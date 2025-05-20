@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader } from "../Loader/Loader";
-import { Filter } from "../filters/Filter/Filter";
 import { useRouter, useSearchParams } from "next/navigation";
 import sort from "@/assets/icons/sort.svg";
 import { ContentList } from "@/components/ContentList/ContentList";
+import { Filter } from "@/components/filters/Filter/Filter";
+import { Loader } from "@/components/Loader/Loader";
 
 export const ContentPage = ({ title = "", url = undefined, sectionFilter = undefined, type = undefined }) => {
   if (!url) return console.error("Debes de especificar una url de la api para obtener las peliculas.");
