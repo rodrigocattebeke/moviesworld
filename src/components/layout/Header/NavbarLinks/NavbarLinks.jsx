@@ -46,12 +46,12 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
           </div>
         </li>
         <li>
-          <Link href="#" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Link href="/iniciar-sesion" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Iniciar sesión
           </Link>
         </li>
         <li>
-          <Link href="#" className={`registerButton button`}>
+          <Link href="/registro" className={`registerButton button`}>
             Registrarse gratis
           </Link>
         </li>
