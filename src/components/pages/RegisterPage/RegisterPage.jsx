@@ -15,7 +15,7 @@ export const RegisterPage = () => {
               <ArrowBack width="1.8rem" height="1.8rem" />
             </Link>
           </div>
-          <div className={styles.loginModal}>
+          <div className={styles.registerModal}>
             <Image src={"/assets/images/logo.png"} className={styles.logo} width={270} height={50} alt="Logo de MoviesLoc" />
             <div className={styles.formContainer}>
               <h2 className={styles.title}>Crea tu cuenta</h2>
@@ -23,11 +23,11 @@ export const RegisterPage = () => {
                 <input type="email" placeholder="ejemplo@email.com" name="email" />
                 <input type="password" placeholder="Contraseña" name="password" />
                 <button type="submit" name="submit" className={`${styles.button} button`}>
-                  Iniciar sesión
+                  Registrarse
                 </button>
               </form>
               <button type="submit" name="submit" className={`${styles.button} button secondary`}>
-                ¿No tenés cuenta? Crea una
+                ¿Ya tienes una cuenta? Inicia sesión
               </button>
             </div>
           </div>
