@@ -1,0 +1,76 @@
+.backToHomeContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 5rem;
+}
+
+.backToHomeContainer a {
+  font-size: 2rem;
+  color: inherit;
+}
+
+.button {
+  width: 100%;
+  min-height: 3.2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form input {
+  width: 100%;
+  height: 4rem;
+  font-size: 1.3rem;
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0 1rem;
+}
+
+.form button {
+  margin-top: 0.7rem;
+}
+
+.loginModal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 32rem;
+  height: fit-content;
+  gap: 2rem;
+}
+
+.logo {
+  width: 100%;
+  max-width: 17rem;
+  height: 100%;
+  max-height: 3rem;
+}
+
+.title {
+  width: fit-content;
+  font-size: 2.2rem;
+  font-weight: bold;
+  background-image: linear-gradient(160deg, var(--primary-color-darker) 30%, var(--primary-color) 65%);
+  color: transparent;
+  background-clip: text;
+}
