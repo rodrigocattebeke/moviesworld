@@ -17,7 +17,7 @@ import { usePathname } from "next/navigation";
 export default function RootLayout({ children }) {
   const pathName = usePathname();
 
-  const hideHeader = pathName == "/registro" || pathName == "/iniciar_sesion";
+  const hideHeader = pathName == "/registro" || pathName == "/iniciar-sesion";
 
   return (
     <html lang="es">
