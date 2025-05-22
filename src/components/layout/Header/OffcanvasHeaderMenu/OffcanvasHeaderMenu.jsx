@@ -5,13 +5,20 @@ export const OffcanvasHeaderMenu = () => {
   return (
     <>
       <div className={`${styles.offcanvas} offcanvas offcanvas-start`} tabIndex="-1" id="headerOffcanvasMenu" aria-labelledby="headerOffcanvasMenuLabel">
-        <div className="offcanvas-header">
-          <Link href={"/"}>
-            <h3 className="offcanvas-title" id="headerOffcanvasMenuLabel" data-bs-dismiss="offcanvas">
-              Movies Loc
-            </h3>
-          </Link>
+        <div className="offcanvas-header d-flex flex-column align-items-end">
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div className={styles.buttonContainer}>
+            <Link href={"/iniciar-sesion"}>
+              <button type="button" className="button secondary">
+                Iniciar sesión
+              </button>
+            </Link>
+            <Link href={"/registro"}>
+              <button type="button" className="button">
+                Registrarse
+              </button>
+            </Link>
+          </div>
         </div>
         <div className="offcanvas-body">
           <div className="container">
