@@ -74,3 +74,21 @@
   color: transparent;
   background-clip: text;
 }
+
+/* Input error */
+.inputError {
+  position: relative;
+  top: -0.5rem;
+  height: 0;
+  overflow: hidden;
+  color: var(--text-error);
+  transition: 0.2s;
+}
+
+.inputError.active {
+  min-height: 2.5rem;
+}
+
+.passwordError.active {
+  height: 7rem;
+}
