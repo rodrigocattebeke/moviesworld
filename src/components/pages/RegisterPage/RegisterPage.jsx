@@ -45,6 +45,7 @@ export const RegisterPage = () => {
       return setUserError(true);
     }
     MLUsersDB[user] = {
+      user,
       password,
     };
 
