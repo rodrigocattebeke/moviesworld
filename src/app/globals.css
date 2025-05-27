@@ -29,6 +29,10 @@
   --primary-color-darker: #b48700;
   --secondary-color: #818181;
   --secondary-color-hover: #a7a7a7;
+
+  /* STATES COLORS */
+  --text-success: rgb(0, 142, 0);
+  --text-error: rgb(251, 0, 0);
 }
 
 /* RESET AND NORMALIZE */
