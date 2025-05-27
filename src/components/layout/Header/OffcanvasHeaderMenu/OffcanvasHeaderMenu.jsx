@@ -9,12 +9,12 @@ export const OffcanvasHeaderMenu = () => {
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           <div className={styles.buttonContainer}>
             <Link href={"/iniciar-sesion"}>
-              <button type="button" className="button secondary">
+              <button type="button" className="button secondary" data-bs-dismiss="offcanvas">
                 Iniciar sesión
               </button>
             </Link>
             <Link href={"/registro"}>
-              <button type="button" className="button">
+              <button type="button" className="button" data-bs-dismiss="offcanvas">
                 Registrarse
               </button>
             </Link>
@@ -25,13 +25,13 @@ export const OffcanvasHeaderMenu = () => {
             <h4>Peliculas</h4>
             <ul className={styles.headerUl}>
               <li>
-                <Link href="/peliculas/populares" data-bs-dismiss="offcanvas">
-                  Lo más popular
+                <Link href="/peliculas/populares">
+                  <span data-bs-dismiss="offcanvas">Lo más popular</span>
                 </Link>
               </li>
               <li>
-                <Link href="/peliculas/mejores_valoradas" data-bs-dismiss="offcanvas">
-                  Mejores valoradas
+                <Link href="/peliculas/mejores_valoradas">
+                  <span data-bs-dismiss="offcanvas">Mejores valoradas</span>
                 </Link>
               </li>
               {/* <li>
@@ -50,13 +50,13 @@ export const OffcanvasHeaderMenu = () => {
             <h4>Series</h4>
             <ul className={styles.headerUl}>
               <li>
-                <Link href="/series/populares" data-bs-dismiss="offcanvas">
-                  Populares
+                <Link href="/series/populares">
+                  <span data-bs-dismiss="offcanvas">Populares</span>
                 </Link>
               </li>
               <li>
-                <Link href="/series/mejores_valoradas" data-bs-dismiss="offcanvas">
-                  Mejores valoradas
+                <Link href="/series/mejores_valoradas">
+                  <span data-bs-dismiss="offcanvas">Mejores valoradas</span>
                 </Link>
               </li>
             </ul>
