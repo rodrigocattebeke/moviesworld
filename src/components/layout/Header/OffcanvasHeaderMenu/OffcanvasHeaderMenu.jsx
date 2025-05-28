@@ -1,24 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./OffcanvasHeaderMenu.module.css";
+import { useContext } from "react";
+import { LoginContext } from "@/contexts/LoginContext";
 
 export const OffcanvasHeaderMenu = () => {
+  const { isLogged } = useContext(LoginContext);
+
   return (
     <>
       <div className={`${styles.offcanvas} offcanvas offcanvas-start`} tabIndex="-1" id="headerOffcanvasMenu" aria-labelledby="headerOffcanvasMenuLabel">
         <div className="offcanvas-header d-flex flex-column align-items-end">
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          <div className={styles.buttonContainer}>
-            <Link href={"/iniciar-sesion"}>
-              <button type="button" className="button secondary" data-bs-dismiss="offcanvas">
-                Iniciar sesión
-              </button>
-            </Link>
-            <Link href={"/registro"}>
-              <button type="button" className="button" data-bs-dismiss="offcanvas">
-                Registrarse
-              </button>
-            </Link>
-          </div>
+          {isLogged ? (
+            ""
+          ) : (
+            <div className={styles.buttonContainer}>
+              <Link href={"/iniciar-sesion"}>
+                <button type="button" className="button secondary" data-bs-dismiss="offcanvas">
+                  Iniciar sesión
+                </button>
+              </Link>
+              <Link href={"/registro"}>
+                <button type="button" className="button" data-bs-dismiss="offcanvas">
+                  Registrarse
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="offcanvas-body">
           <div className="container">
