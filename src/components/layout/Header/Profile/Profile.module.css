@@ -1,0 +1,19 @@
+.personIcon {
+  cursor: pointer;
+}
+
+.personIconContainer {
+  margin-right: 0.3rem;
+}
+
+.personIconContainer ul {
+  margin-top: 0.5rem !important;
+}
+
+.personIconContainer li,
+.personIconContainer a,
+.personIconContainer p {
+  color: var(--font-primary-color);
+  margin: 0;
+  cursor: pointer;
+}
