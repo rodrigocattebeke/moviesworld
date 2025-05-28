@@ -4,35 +4,23 @@ import Link from "next/link";
 import styles from "./LoginPage.module.css";
 import { ArrowBack } from "@/components/icons/ArrowBack";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { LoginContext } from "@/contexts/LoginContext";
 
 export const LoginPage = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
-  const navigate = useRouter();
+  const { login } = useContext(LoginContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!user || !password) {
-      return setLoginError(true);
+      return setLoginError(false);
     }
-
-    const MLUsersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
-
-    if (MLUsersDB.hasOwnProperty(user)) {
-      if (MLUsersDB[user].password && MLUsersDB[user].password === password) {
-        localStorage.setItem("MLLoggedUser", user);
-        navigate.push("./");
-        return;
-      } else {
-        return setLoginError(true);
-      }
-    } else {
-      setLoginError(true);
-    }
+    const loginRes = login(user, password);
+    setLoginError(!loginRes);
   };
 
   const onUserChange = (e) => {
