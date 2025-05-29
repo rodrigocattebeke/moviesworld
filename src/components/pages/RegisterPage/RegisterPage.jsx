@@ -4,16 +4,17 @@ import Link from "next/link";
 import styles from "./RegisterPage.module.css";
 import { ArrowBack } from "@/components/icons/ArrowBack";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { LoginContext } from "@/contexts/LoginContext";
 
 export const RegisterPage = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [userError, setUserError] = useState(false);
+  const [userIsSuccess, setUserIsSuccess] = useState(true);
   const [userErrorMessage, setUserErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const navigate = useRouter();
+
+  const { register } = useContext(LoginContext);
 
   const userRegex = /^[A-Za-z1-9]{4,}$/; // Validates that the user:
   // - Starts with one or more word characters, dots, or hyphens (before the "@")
@@ -32,31 +33,22 @@ export const RegisterPage = () => {
     e.preventDefault();
     if (!userRegex.test(user)) {
       setUserErrorMessage("El nombre de usuario debe tener al menos 4 letras y contener solo caracteres alfabéticos (A-Z o a-z) o números (1 - 9), sin espacios ni símbolos.");
-      return setUserError(true);
+      return setUserIsSuccess(false);
     }
     if (!passwordRegex.test(password)) {
       return setPasswordError(true);
     }
 
-    const MLUsersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
-
-    if (MLUsersDB.hasOwnProperty(user)) {
-      setUserErrorMessage("El nombre de usuario ya existe. Intenta con otro nombre de usuario.");
-      return setUserError(true);
-    }
-    MLUsersDB[user] = {
-      user,
-      password,
-    };
-
-    localStorage.setItem("MLUsersDB", JSON.stringify(MLUsersDB));
-    localStorage.setItem("MLLoggedUser", user);
-    navigate.push("./");
+    const { isSuccess, errorMessage } = register(user, password);
+    // The boolean variable `isSuccess` is negated because if `isSuccess` is false,
+    // then `setUserError` should be set to true.
+    setUserIsSuccess(isSuccess);
+    setUserErrorMessage(errorMessage);
   };
 
   const onUserChange = (e) => {
     setUser(e.target.value);
-    setUserError(false);
+    setUserIsSuccess(true);
   };
 
   const onPasswordChange = (e) => {
@@ -79,7 +71,7 @@ export const RegisterPage = () => {
               <h2 className={styles.title}>Crea tu cuenta</h2>
               <form className={styles.form} onSubmit={handleSubmit}>
                 <input type="text" placeholder="Usuario" name="user" value={user} onChange={(e) => onUserChange(e)} required />
-                <small className={`${styles.userError} ${styles.inputError} ${userError ? styles.active : ""}`}>{userErrorMessage}</small>
+                <small className={`${styles.userIsSuccess} ${styles.inputError} ${userIsSuccess ? "" : styles.active}`}>{userErrorMessage}</small>
                 {/*  */}
                 <input type="password" placeholder="Contraseña" name="password" value={password} onChange={(e) => onPasswordChange(e)} required />{" "}
                 <small className={`${styles.passwordError} ${styles.inputError} ${passwordError ? styles.active : ""}`}>
