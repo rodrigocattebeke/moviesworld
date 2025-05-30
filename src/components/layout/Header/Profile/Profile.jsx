@@ -6,7 +6,7 @@ import { LoginContext } from "@/contexts/LoginContext";
 import Link from "next/link";
 
 export const Profile = () => {
-  const { isLogged, logout } = useContext(LoginContext);
+  const { auth, user } = useContext(LoginContext);
 
   return (
     <div className={`${styles.personIconContainer}`}>
@@ -15,16 +15,16 @@ export const Profile = () => {
       </span>
       <ul className="dropdown-menu">
         <li className="dropdown-item">Próximamente...</li>
-        {isLogged ? (
+        {user.isLogged ? (
           <li>
-            <p className={`dropdown-item`} onClick={logout}>
+            <p className={`dropdown-item`} onClick={auth.logout}>
               Cerrar sesión
             </p>
           </li>
         ) : (
           ""
         )}
-        {isLogged ? (
+        {user.isLogged ? (
           ""
         ) : (
           <li>

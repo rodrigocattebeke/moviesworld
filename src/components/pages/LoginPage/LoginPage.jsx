@@ -11,7 +11,7 @@ export const LoginPage = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
-  const { login } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ export const LoginPage = () => {
     if (!user || !password) {
       return setLoginError(false);
     }
-    const loginRes = login(user, password);
+    const loginRes = auth.login(user, password);
     setLoginError(!loginRes);
   };
 

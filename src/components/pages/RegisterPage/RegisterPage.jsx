@@ -14,7 +14,7 @@ export const RegisterPage = () => {
   const [userErrorMessage, setUserErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
-  const { register } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
 
   const userRegex = /^[A-Za-z1-9]{4,}$/; // Validates that the user:
   // - Starts with one or more word characters, dots, or hyphens (before the "@")
@@ -39,7 +39,7 @@ export const RegisterPage = () => {
       return setPasswordError(true);
     }
 
-    const { isSuccess, errorMessage } = register(user, password);
+    const { isSuccess, errorMessage } = auth.register(user, password);
     // The boolean variable `isSuccess` is negated because if `isSuccess` is false,
     // then `setUserError` should be set to true.
     setUserIsSuccess(isSuccess);

@@ -6,14 +6,13 @@ import { useContext } from "react";
 import { LoginContext } from "@/contexts/LoginContext";
 
 export const OffcanvasHeaderMenu = () => {
-  const { isLogged } = useContext(LoginContext);
-
+  const { user } = useContext(LoginContext);
   return (
     <>
       <div className={`${styles.offcanvas} offcanvas offcanvas-start`} tabIndex="-1" id="headerOffcanvasMenu" aria-labelledby="headerOffcanvasMenuLabel">
         <div className="offcanvas-header d-flex flex-column align-items-end">
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          {isLogged ? (
+          {user.isLogged ? (
             ""
           ) : (
             <div className={styles.buttonContainer}>
