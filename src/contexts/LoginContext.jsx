@@ -1,13 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import { favoritesReducer } from "./reducers/favoritesReducer";
+import { ADD_MOVIE, ADD_SERIE, REMOVE_MOVIE, REMOVE_SERIE, SYNC_FAVORITES } from "./reducers/favoritesTypes";
 
 const LoginContext = createContext();
 const userBasicInformation = {
   user: undefined,
   favorites: {
-    movies: undefined,
-    series: undefined,
+    moviesId: [],
+    seriesId: [],
   },
 };
 
@@ -17,6 +19,9 @@ export const LoginProvider = ({ children }) => {
   const [usersDB, setUsersDB] = useState(undefined);
   const navigate = useRouter();
 
+  const [userFavorites, dispatchFavorites] = useReducer(favoritesReducer, userBasicInformation.favorites);
+
+  //  // // ACCOUNT LOGIN AND LOG OUT MANAGE
   //Get the users DB for the localStorage
   useEffect(() => {
     const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
@@ -32,6 +37,7 @@ export const LoginProvider = ({ children }) => {
       if (usersDB.hasOwnProperty(savedLoggedUser)) {
         const { password, ...publicUserData } = usersDB[savedLoggedUser];
         setLoggedUserData(publicUserData);
+        dispatchFavorites({ type: SYNC_FAVORITES, payload: publicUserData.favorites });
       }
     }
   }, [usersDB]);
@@ -86,7 +92,72 @@ export const LoginProvider = ({ children }) => {
     }
   };
 
-  return <LoginContext.Provider value={{ isLogged, login, logout, loggedUserData, register }}>{children}</LoginContext.Provider>;
+  //  // // MOVIES AND SERIES MANAGE
+  useEffect(() => {
+    if (!isLogged) return;
+
+    if (userFavorites && loggedUserData) {
+      const loggedUserDataUpdated = { ...loggedUserData, userFavorites };
+      setLoggedUserData(loggedUserDataUpdated);
+    }
+  }, [userFavorites, isLogged]);
+
+  const addFavoriteMovie = (movieId) => {
+    const action = {
+      type: ADD_MOVIE,
+      payload: movieId,
+    };
+
+    dispatchFavorites(action);
+  };
+
+  const removeFavoriteMovie = (movieId) => {
+    const action = {
+      type: REMOVE_MOVIE,
+      payload: movieId,
+    };
+
+    dispatchFavorites(action);
+  };
+
+  const addFavoriteSerie = (serieId) => {
+    const action = {
+      type: ADD_SERIE,
+      payload: serieId,
+    };
+
+    dispatchFavorites(action);
+  };
+
+  const removeFavoriteSerie = (serieId) => {
+    const action = {
+      type: REMOVE_SERIE,
+      payload: serieId,
+    };
+
+    dispatchFavorites(action);
+  };
+
+  //AGROUP FUNCTIONS
+  const auth = {
+    login,
+    register,
+    logout,
+  };
+
+  const favorites = {
+    addMovie: addFavoriteMovie,
+    removeMovie: removeFavoriteMovie,
+    addSerie: addFavoriteSerie,
+    removeSerie: removeFavoriteSerie,
+  };
+
+  const user = {
+    isLogged,
+    loggedUserData,
+  };
+
+  return <LoginContext.Provider value={{ auth, favorites, user }}>{children}</LoginContext.Provider>;
 };
 
 export { LoginContext };
