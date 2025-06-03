@@ -21,7 +21,30 @@ export const LoginProvider = ({ children }) => {
 
   const [userFavorites, dispatchFavorites] = useReducer(favoritesReducer, userBasicInformation.favorites);
 
-  //  // // ACCOUNT LOGIN AND LOG OUT MANAGE
+  //Refresh users & actualize db
+  const refreshUsersDB = () => {
+    const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
+    setUsersDB(usersDB);
+  };
+
+  const updateUserFavoriteInDB = () => {
+    if (!usersDB) return;
+    if (usersDB.hasOwnProperty(loggedUserData.user)) {
+      const updatedUsersDB = usersDB;
+
+      updatedUsersDB[loggedUserData.user].favorites = userFavorites;
+
+      setUsersDB(updatedUsersDB);
+      localStorage.setItem("MLUsersDB", JSON.stringify(updatedUsersDB));
+    }
+  };
+
+  //Autosave of user favorites in DB
+  useEffect(() => {
+    updateUserFavoriteInDB();
+  }, [loggedUserData]);
+
+  //  // // ACCOUNT REGISTER, LOGIN AND LOG OUT MANAGE
   //Get the users DB for the localStorage
   useEffect(() => {
     const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
@@ -30,8 +53,9 @@ export const LoginProvider = ({ children }) => {
 
   //If the localstorage have a saved user logged, find it.
   useEffect(() => {
-    if (!usersDB) return;
+    if (loggedUserData) return;
     const savedLoggedUser = localStorage.getItem("MLLoggedUser") || undefined;
+    const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
 
     if (savedLoggedUser) {
       if (usersDB.hasOwnProperty(savedLoggedUser)) {
@@ -40,13 +64,9 @@ export const LoginProvider = ({ children }) => {
         dispatchFavorites({ type: SYNC_FAVORITES, payload: publicUserData.favorites });
       }
     }
-  }, [usersDB]);
+  }, []);
 
-  //Function for refresh users
-  const refreshUsers = () => {
-    const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
-    setUsersDB(usersDB);
-  };
+  //register
 
   const register = (user, password) => {
     if (usersDB.hasOwnProperty(user)) {
@@ -67,14 +87,14 @@ export const LoginProvider = ({ children }) => {
     localStorage.setItem("MLUsersDB", JSON.stringify(usersDBCloned));
     localStorage.setItem("MLLoggedUser", user);
     setLoggedUserData({ ...userBasicInformation, user });
-    refreshUsers();
+    refreshUsersDB();
     navigate.push("./");
     return { isSuccess: true, errorMessage: undefined };
   };
 
   //Login
   const login = (user, password) => {
-    refreshUsers();
+    refreshUsersDB();
     if (usersDB.hasOwnProperty(user) && usersDB[user].password === password) {
       localStorage.setItem("MLLoggedUser", user);
       navigate.push("./");
@@ -89,15 +109,16 @@ export const LoginProvider = ({ children }) => {
     if (loggedUserData) {
       setLoggedUserData(undefined);
       localStorage.removeItem("MLLoggedUser");
+      window.location.href = "/";
     }
   };
 
   //  // // MOVIES AND SERIES MANAGE
+  //When the userFavorites change, save the new state to loggedUserData;
   useEffect(() => {
     if (!isLogged) return;
-
     if (userFavorites && loggedUserData) {
-      const loggedUserDataUpdated = { ...loggedUserData, userFavorites };
+      const loggedUserDataUpdated = { ...loggedUserData, favorites: userFavorites };
       setLoggedUserData(loggedUserDataUpdated);
     }
   }, [userFavorites, isLogged]);
@@ -138,6 +159,18 @@ export const LoginProvider = ({ children }) => {
     dispatchFavorites(action);
   };
 
+  const isFavorite = (type, id) => {
+    if (!type) return console.error("Se necesita el tipo para verificar. Válidos: serie - pelicula");
+    if (type !== "serie" && type !== "pelicula") return console.error("Tipo invalido. Válidos: serie - pelicula");
+    if (!id) return console.error("Se necesita el id para verificar.");
+
+    if (type === "serie") {
+      return userFavorites.seriesId.includes(id);
+    } else if (type == "pelicula") {
+      return userFavorites.moviesId.includes(id);
+    }
+  };
+
   //AGROUP FUNCTIONS
   const auth = {
     login,
@@ -150,6 +183,7 @@ export const LoginProvider = ({ children }) => {
     removeMovie: removeFavoriteMovie,
     addSerie: addFavoriteSerie,
     removeSerie: removeFavoriteSerie,
+    isFavorite,
   };
 
   const user = {
