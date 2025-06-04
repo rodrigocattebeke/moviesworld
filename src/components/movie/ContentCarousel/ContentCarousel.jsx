@@ -7,7 +7,16 @@ import styles from "./ContentCarousel.module.css";
 
 export const ContentCarousel = ({ title = undefined, contentList = undefined, type = undefined }) => {
   if (!contentList) return console.error("Se debe de pasar la lista de elementos para el carousel.");
-  if (!type) return console.error("Se debe de pasar un tipo. Disponibles: Series, Peliculas");
+  if (!type) return console.error("Se debe de pasar un tipo. Disponibles: series, peliculas");
+
+  //Normalize for MovieCard type. The types of MovieCard are "serie" or "pelicula" in singular.
+  if (type === "series") {
+    type = "serie";
+  } else if (type === "peliculas") {
+    type = "pelicula";
+  } else {
+    return console.error("Los tipos válidos son: peliculas - series");
+  }
 
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
