@@ -1,0 +1,64 @@
+.container {
+  width: 100%;
+  height: auto;
+}
+
+.favoriteContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.favorite,
+.favoriteFilled {
+  width: 100%;
+  height: auto;
+  fill: var(--favorite-secondary-color);
+}
+
+.favoriteFilled {
+  position: absolute;
+  fill: var(--favorite-primary-color) !important;
+  width: 0;
+  height: 0;
+  animation: removeFavorite 0.1s;
+}
+
+.favoriteFilled.active {
+  width: 100%;
+  height: auto;
+  animation: addFavorite 0.1s;
+}
+
+@keyframes addFavorite {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  60% {
+    width: 110%;
+    height: 110%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes removeFavorite {
+  0% {
+    width: 100%;
+    height: 100%;
+  }
+  60% {
+    width: 110%;
+    height: 110%;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
