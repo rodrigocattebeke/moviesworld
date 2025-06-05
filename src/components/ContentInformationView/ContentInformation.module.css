@@ -1,3 +1,16 @@
+.addToFavoritesContainer {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 2.2rem;
+  z-index: 10;
+}
+
+.addToFavoritesContainer:hover + .posterImage,
+.posterImage:hover {
+  filter: brightness(0.6);
+}
+
 .backdropImage {
   width: 100%;
   height: 100%;
@@ -21,7 +34,7 @@
   z-index: 1;
 }
 
-.movieHeader * {
+.contentHeader * {
   margin: 0;
 }
 
@@ -37,18 +50,28 @@
   max-height: 400px;
 }
 
-.movieInformation {
+.contentInformation {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
 
-.movieInformation p {
+.contentInformation p {
   margin: 0;
 }
 
+.contentImgContainer {
+  position: relative;
+  width: 100%;
+  max-width: 10rem;
+  height: fit-content;
+}
+
 .posterImage {
+  width: 100%;
+  height: auto;
   border-radius: 0.3rem;
+  transition: 0.2s;
 }
 
 .showMore {
