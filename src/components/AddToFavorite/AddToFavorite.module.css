@@ -17,6 +17,7 @@
   width: 100%;
   height: auto;
   fill: var(--favorite-secondary-color);
+  cursor: pointer;
 }
 
 .favoriteFilled {
