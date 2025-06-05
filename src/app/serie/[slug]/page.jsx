@@ -6,6 +6,7 @@ import { SerieInformationView } from "@/components/serie/SerieInformationView/Se
 import { SeasonsCarousel } from "@/components/serie/SeasonsCarousel/SeasonsCarousel";
 import useFetch from "@/hooks/useFetch";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
+import { ContentInformationView } from "@/components/ContentInformationView/ContentInformationView";
 
 export default function Serie() {
   const { slug } = useParams();
@@ -27,7 +28,7 @@ export default function Serie() {
         <h3 className="my-4">Ocurrio un error al cargar la película.</h3>
       ) : (
         <>
-          <SerieInformationView serie={serie} />
+          <ContentInformationView type={"serie"} content={serie} />
           <SeasonsCarousel seasons={serie.seasons} />
           {recomendation.results.length == 0 ? "" : <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"series"} />}
         </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound, useParams } from "next/navigation";
-import { MovieInformationView } from "@/components/movie/MovieInformationView/MovieInformationView";
+import { ContentInformationView } from "@/components/ContentInformationView/ContentInformationView";
 import { Loader } from "@/components/Loader/Loader";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
 import useFetch from "@/hooks/useFetch";
@@ -23,7 +23,7 @@ export default function Pelicula() {
         <h3>Ocurrio un error al cargar la película.</h3>
       ) : (
         <>
-          <MovieInformationView movie={movie} />
+          <ContentInformationView type={"pelicula"} content={movie} />
           {recomendation.results.length == 0 ? "" : <ContentCarousel title={"Recomendaciones"} contentList={recomendation.results} type={"peliculas"} />}
         </>
       )}
