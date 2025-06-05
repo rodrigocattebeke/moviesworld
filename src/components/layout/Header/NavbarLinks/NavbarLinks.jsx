@@ -1,10 +1,14 @@
 import Link from "next/link";
 import "./NavbarLinks.css";
+import { useContext } from "react";
+import { LoginContext } from "@/contexts/LoginContext";
 
 export const NavbarLinks = ({ className = "", ...props } = {}) => {
+  const { user } = useContext(LoginContext);
+
   return (
     <div className={`navbarLinks ${className}`} {...props}>
-      <ul className="d-flex flex-row">
+      <ul className={`d-flex flex-row ${user.isLogged ? "justify-content-end gap-5 pe-5" : ""}`}>
         <li>
           <div className="dropdown h-100">
             <Link href="#" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,16 +49,22 @@ export const NavbarLinks = ({ className = "", ...props } = {}) => {
             </ul>
           </div>
         </li>
-        <li>
-          <Link href="/iniciar-sesion" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Iniciar sesión
-          </Link>
-        </li>
-        <li>
-          <Link href="/registro" className={`registerButton button`}>
-            Registrarse gratis
-          </Link>
-        </li>
+        {user.isLogged ? (
+          ""
+        ) : (
+          <>
+            <li>
+              <Link href="/iniciar-sesion" className="my-auto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Iniciar sesión
+              </Link>
+            </li>
+            <li>
+              <Link href="/registro" className={`registerButton button`}>
+                Registrarse gratis
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );
