@@ -26,6 +26,7 @@ export default function useFetch(url = undefined) {
       try {
         const res = await fetch(url, { signal: controller.signal });
         const data = await res.json();
+        if (data.error) throw Error(data.error);
         if (isMounted) {
           setData(data);
           setIsSuccess(true);
