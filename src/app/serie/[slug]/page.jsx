@@ -2,7 +2,6 @@
 
 import { notFound, useParams } from "next/navigation";
 import { Loader } from "@/components/Loader/Loader";
-import { SerieInformationView } from "@/components/serie/SerieInformationView/SerieInformationView";
 import { SeasonsCarousel } from "@/components/serie/SeasonsCarousel/SeasonsCarousel";
 import useFetch from "@/hooks/useFetch";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
