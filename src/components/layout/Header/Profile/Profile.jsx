@@ -14,13 +14,19 @@ export const Profile = () => {
         <Person width={"1.9rem"} height={"1.9rem"} />
       </span>
       <ul className="dropdown-menu">
-        <li className="dropdown-item">Próximamente...</li>
         {user.isLogged ? (
-          <li>
-            <p className={`dropdown-item`} onClick={auth.logout}>
-              Cerrar sesión
-            </p>
-          </li>
+          <>
+            <li>
+              <Link href={"/cuenta/favoritos"} className={`dropdown-item`}>
+                Favoritos
+              </Link>
+            </li>
+            <li>
+              <p className={`dropdown-item`} onClick={auth.logout}>
+                Cerrar sesión
+              </p>
+            </li>
+          </>
         ) : (
           ""
         )}
