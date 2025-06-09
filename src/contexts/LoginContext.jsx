@@ -29,6 +29,7 @@ export const LoginProvider = ({ children }) => {
 
   const updateUserFavoriteInDB = () => {
     if (!usersDB) return;
+    if (!loggedUserData) return;
     if (usersDB.hasOwnProperty(loggedUserData.user)) {
       const updatedUsersDB = usersDB;
 
@@ -45,15 +46,8 @@ export const LoginProvider = ({ children }) => {
   }, [loggedUserData]);
 
   //  // // ACCOUNT REGISTER, LOGIN AND LOG OUT MANAGE
-  //Get the users DB for the localStorage
-  useEffect(() => {
-    const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
-    setUsersDB(usersDB);
-  }, []);
 
-  //If the localstorage have a saved user logged, find it.
-  useEffect(() => {
-    if (loggedUserData) return;
+  const loginUser = () => {
     const savedLoggedUser = localStorage.getItem("MLLoggedUser") || undefined;
     const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
 
@@ -64,6 +58,18 @@ export const LoginProvider = ({ children }) => {
         dispatchFavorites({ type: SYNC_FAVORITES, payload: publicUserData.favorites });
       }
     }
+  };
+
+  //Get the users DB for the localStorage
+  useEffect(() => {
+    const usersDB = JSON.parse(localStorage.getItem("MLUsersDB")) || {};
+    setUsersDB(usersDB);
+  }, []);
+
+  //If the localstorage have a saved user logged, find it.
+  useEffect(() => {
+    if (loggedUserData) return;
+    loginUser();
   }, []);
 
   //register
@@ -97,6 +103,7 @@ export const LoginProvider = ({ children }) => {
     refreshUsersDB();
     if (usersDB.hasOwnProperty(user) && usersDB[user].password === password) {
       localStorage.setItem("MLLoggedUser", user);
+      loginUser();
       navigate.push("./");
       return true;
     } else {
