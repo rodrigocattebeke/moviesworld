@@ -89,9 +89,11 @@ export const RegisterPage = () => {
                   Registrarse
                 </button>
               </form>
-              <button type="submit" name="submit" className={`${styles.button} button secondary`}>
-                ¿Ya tienes una cuenta? Inicia sesión
-              </button>
+              <Link href={"/iniciar-sesion"}>
+                <button type="submit" name="submit" className={`${styles.button} button secondary`}>
+                  ¿Ya tienes una cuenta? Inicia sesión
+                </button>
+              </Link>
             </div>
           </div>
         </div>
