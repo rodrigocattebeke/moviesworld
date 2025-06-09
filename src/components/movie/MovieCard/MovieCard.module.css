@@ -15,7 +15,7 @@
   grid-template-rows: 80% 20%;
   width: 100%;
   min-width: 8rem;
-  max-width: 10.5rem;
+  max-width: 10rem;
   height: auto;
   min-height: 10rem;
   max-height: 19rem;
@@ -29,14 +29,14 @@
 
 .cardContainer > :nth-child(2) {
   grid-row: 1/2;
-  width: inherit;
+  width: 100%;
   max-width: inherit;
 }
 
 .cardContainer > :nth-child(3) {
   grid-row: 2/3;
-  width: inherit;
-  max-width: inherit;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .cardContainer:hover .addToFavoritesContainer {
@@ -82,15 +82,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  max-width: inherit;
+  width: 100%;
+  max-width: 100%;
   padding: 0 0.2rem;
 }
 
 .movieTitle {
   margin: 0;
   text-wrap: nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Search mode */
