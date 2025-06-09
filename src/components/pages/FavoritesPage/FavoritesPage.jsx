@@ -29,7 +29,7 @@ export const FavoritesPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  //   if (!user.isLogged) return navigate.push("/iniciar-sesion");
+  if (!user.isLogged) return navigate.push("/iniciar-sesion");
 
   useEffect(() => {
     setFavoriteType(favTypes[typeSelected]);
