@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound, useParams } from "next/navigation";
-import { ContentInformationView } from "@/components/ContentInformationView/ContentInformationView";
+import { ContentInformationView } from "@/components/content/ContentInformationView/ContentInformationView";
 import { Loader } from "@/components/Loader/Loader";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
 import useFetch from "@/hooks/useFetch";

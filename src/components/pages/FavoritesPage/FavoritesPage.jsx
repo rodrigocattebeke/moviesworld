@@ -5,7 +5,7 @@ import videocam from "@/assets/icons/videocam.svg";
 import { LoginContext } from "@/contexts/LoginContext";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/Loader/Loader";
-import { ContentList } from "@/components/ContentList/ContentList";
+import { ContentList } from "@/components/content/ContentList/ContentList";
 
 const filters = ["peliculas", "series"];
 

@@ -5,7 +5,7 @@ import { Loader } from "@/components/Loader/Loader";
 import { SeasonsCarousel } from "@/components/serie/SeasonsCarousel/SeasonsCarousel";
 import useFetch from "@/hooks/useFetch";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
-import { ContentInformationView } from "@/components/ContentInformationView/ContentInformationView";
+import { ContentInformationView } from "@/components/content/ContentInformationView/ContentInformationView";
 
 export default function Serie() {
   const { slug } = useParams();

@@ -3,7 +3,7 @@ import styles from "./SearchPage.module.css";
 import videoSettingsIcon from "@/assets/icons/video_settings.svg";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ContentList } from "@/components/ContentList/ContentList";
+import { ContentList } from "@/components/content/ContentList/ContentList";
 import { Loader } from "@/components/Loader/Loader";
 import { Filter } from "@/components/filters/Filter/Filter";
 

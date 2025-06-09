@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import sort from "@/assets/icons/sort.svg";
-import { ContentList } from "@/components/ContentList/ContentList";
+import { ContentList } from "@/components/content/ContentList/ContentList";
 import { Filter } from "@/components/filters/Filter/Filter";
 import { Loader } from "@/components/Loader/Loader";
 
