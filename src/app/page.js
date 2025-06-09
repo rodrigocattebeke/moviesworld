@@ -1,4 +1,4 @@
-import { Hero } from "@/components/Hero/Hero";
+import { Hero } from "@/components/layout/Hero/Hero";
 import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarousel";
 
 export default async function Home() {
