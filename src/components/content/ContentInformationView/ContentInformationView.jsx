@@ -44,8 +44,9 @@ export const ContentInformationView = ({ type = undefined, content = {} }) => {
   }
 
   return (
-    <section className="container-xl py-4 position-relative">
+    <section className={`${styles.ContentContainer} container-xl`}>
       <div className={styles.backdropImageContainer}>
+        <div className={styles.gradientOverlay}></div>
         <Image src={contentBackdrop} width={900} height={290} sizes="100vw" alt={`Banner de la película ${content.title}`} className={styles.backdropImage} />
       </div>
       <div className={`${styles.container} container`}>
