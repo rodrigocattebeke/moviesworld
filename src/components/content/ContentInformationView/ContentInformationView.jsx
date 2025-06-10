@@ -4,7 +4,7 @@ import { getBackdropUrl } from "@/utils/getBackdropUrl";
 import { getPosterUrl } from "@/utils/getPosterUrl";
 import styles from "./ContentInformation.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Rate } from "@/components/Rate/Rate";
 import { AddToFavorite } from "@/components/AddToFavorite/AddToFavorite";
 
@@ -15,10 +15,21 @@ export const ContentInformationView = ({ type = undefined, content = {} }) => {
   if (type !== "serie" && type !== "pelicula") return console.error("El tipo pasado es incorrecto. Tipos validos: serie - pelicula");
 
   const [showMore, setShowMore] = useState(false);
+  const [activeShowMore, setActiveShowMore] = useState(false);
+  const overviewRef = useRef(undefined);
 
   const handleShowClick = () => {
     setShowMore(!showMore);
   };
+
+  useEffect(() => {
+    if (!overviewRef.current) return;
+
+    //Get the document font size, and multiply by 5 to get 5rem (5rem is the max-height of the overview element);
+    const maxHeight = parseFloat(getComputedStyle(document.documentElement).fontSize) * 5;
+    //If the overview is taller than 5rem, show the showMore button;
+    overviewRef.current.clientHeight >= maxHeight ? setActiveShowMore(true) : setActiveShowMore(false);
+  }, []);
 
   //Normalize
   const title = type == "serie" ? content.name : content.title;
@@ -69,10 +80,16 @@ export const ContentInformationView = ({ type = undefined, content = {} }) => {
               </div>
             </div>
             <div className={styles.contentDescription}>
-              <p className={`${styles.overview} ${showMore ? styles.active : ""}`}>{content.overview}</p>
-              <p className={styles.showMore} onClick={handleShowClick}>
-                {showMore ? "Ver menos" : "Ver más"}
+              <p className={`${styles.overview} ${showMore ? styles.active : ""}`} ref={overviewRef}>
+                {content.overview}
               </p>
+              {!activeShowMore ? (
+                ""
+              ) : (
+                <p className={styles.showMore} onClick={handleShowClick}>
+                  {showMore ? "Ver menos" : "Ver más"}
+                </p>
+              )}
             </div>
           </div>
         </div>
