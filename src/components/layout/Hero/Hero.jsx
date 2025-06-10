@@ -14,6 +14,8 @@ export const Hero = async () => {
   return (
     <section className={`${styles.heroContainer} container-xxl p-0`}>
       <div className={`${styles.heroImgContainer}`}>
+        <div className={styles.gradientOverlay}></div>
+
         <Image src={backdropImg} loading="lazy" className={`${styles.heroImg}`} alt={`Banner de la película ${heroMovie.title}`} width={700} height={300} sizes="100vw" />
       </div>
       <div className={`container-fluid`}>
