@@ -3,22 +3,26 @@ import { ContentCarousel } from "@/components/movie/ContentCarousel/ContentCarou
 
 export default async function Home() {
   try {
-    const [popularesRes, mejoresRes] = await Promise.all([fetch("https://moviesloc.netlify.app/api/peliculas/populares", { cache: "no-store" }), fetch("https://moviesloc.netlify.app/api/peliculas/mejores_valoradas", { cache: "no-store" })]);
+    const [popularMoviesRes, topRatedMoviesRes, popularSeriesRes, topRatedSeriesRes] = await Promise.all([fetch("https://moviesloc.netlify.app/api/peliculas/populares"), fetch("https://moviesloc.netlify.app/api/peliculas/mejores_valoradas"), fetch("https://moviesloc.netlify.app/api/series/populares"), fetch("https://moviesloc.netlify.app/api/series/mejores_valoradas")]);
 
-    const populares = await popularesRes.json();
-    const mejores = await mejoresRes.json();
+    const popularMovies = await popularMoviesRes.json();
+    const topRatedMovies = await topRatedMoviesRes.json();
+    const popularSeries = await popularSeriesRes.json();
+    const topRatedSeries = await topRatedSeriesRes.json();
 
     return (
       <>
         <>
           <Hero />
-          <ContentCarousel title="Peliculas populares" contentList={populares.results} type={"peliculas"} />
-          <ContentCarousel title="Mejores valoradas" contentList={mejores.results} type={"peliculas"} />
+          <ContentCarousel title="Peliculas populares" contentList={popularMovies.results} type={"peliculas"} />
+          <ContentCarousel title="Peliculas mejores valoradas" contentList={topRatedMovies.results} type={"peliculas"} />
+          <ContentCarousel title="Series populares" contentList={popularSeries.results} type={"series"} />
+          <ContentCarousel title="Series mejores valoradas" contentList={topRatedSeries.results} type={"series"} />
         </>
       </>
     );
   } catch (error) {
     console.error("Error al acceder al servidor:", error);
-    return <h2 className="my-4">Error loading data...</h2>;
+    return <h2 className="my-4">Ocurrió un error al cargar el contenido, intente más tarde.</h2>;
   }
 }
