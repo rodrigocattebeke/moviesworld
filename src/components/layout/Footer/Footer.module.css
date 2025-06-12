@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  background-color: var(--background-color-primary-75);
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.container a {
+  color: var(--primary-color);
+}
+
+.container a:hover {
+  color: var(--primary-color-hover);
+}
