@@ -33,14 +33,28 @@ export const LoginPage = () => {
     setLoginError(false);
   };
 
+  //Handle back button
+  const handleBack = () => {
+    if (document.referrer) {
+      const hostname = new URL(document.referrer).hostname;
+      if (hostname == pageHostName) {
+        window.history.back();
+      } else {
+        navigation.push("/");
+      }
+    } else {
+      navigation.push("/");
+    }
+  };
+
   return (
     <div className="container-fluid ">
       <section className="container-xl d-flex align-items-center justify-content-center mb-3">
         <div className={styles.container}>
           <div className={styles.backToHomeContainer}>
-            <Link href={"/"}>
+            <span onClick={handleBack}>
               <ArrowBack width="1.8rem" height="1.8rem" />
-            </Link>
+            </span>
           </div>
           <div className={styles.loginModal}>
             <Image src={"/assets/images/logo.png"} className={styles.logo} width={270} height={50} alt="Logo de MoviesLoc" />

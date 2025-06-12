@@ -5,9 +5,8 @@
   min-height: 5rem;
 }
 
-.backToHomeContainer a {
-  font-size: 2rem;
-  color: inherit;
+.backToHomeContainer span {
+  cursor: pointer;
 }
 
 .button {
