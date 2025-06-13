@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./OffcanvasHeaderMenu.module.css";
 import { useContext } from "react";
 import { LoginContext } from "@/contexts/LoginContext";
+import { Close } from "@/components/icons/Close";
 
 export const OffcanvasHeaderMenu = () => {
   const { user } = useContext(LoginContext);
@@ -11,7 +12,8 @@ export const OffcanvasHeaderMenu = () => {
     <>
       <div className={`${styles.offcanvas} offcanvas offcanvas-start`} tabIndex="-1" id="headerOffcanvasMenu" aria-labelledby="headerOffcanvasMenuLabel">
         <div className="offcanvas-header d-flex flex-column align-items-end">
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <Close data-bs-dismiss="offcanvas" aria-label="Close" className={styles.closeButton} />
+
           {user.isLogged ? (
             ""
           ) : (

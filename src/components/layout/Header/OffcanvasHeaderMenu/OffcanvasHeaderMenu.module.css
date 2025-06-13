@@ -9,6 +9,18 @@
   padding: 1rem 0;
 }
 
+.closeButton {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  fill: var(--icon-primary-color);
+  transition: 0.1s;
+}
+
+.closeButton:hover {
+  fill: var(--icon-primary-color-hover);
+}
+
 .headerUl {
   padding-left: 1rem;
   list-style: none;
