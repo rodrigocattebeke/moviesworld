@@ -4,6 +4,7 @@ export async function GET(req) {
   const query = req.nextUrl.searchParams.get("q");
   const page = req.nextUrl.searchParams.get("page");
   const type = req.nextUrl.searchParams.get("type");
+  if (type !== "tv" && type !== "movie") return Response.json({ error: `Debes de pasar el parámetro "type". Los types validos son: "tv" , "movie"` }, { status: 404 });
 
   try {
     const res = await fetchFromTMDB(`/search/${type}`, `include_adult=true&query=${query}&page=${page || 1}`);
