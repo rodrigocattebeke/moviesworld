@@ -1,9 +1,18 @@
 .backdrop {
+  display: none;
   position: absolute;
   width: 100%;
   height: 100vh;
   left: 0;
   top: 0;
+  z-index: 1;
+  background-color: transparent;
+  transition: 2s;
+}
+
+.backdrop.active {
+  display: flex;
+  background-color: var(--background-color-primary-75);
 }
 
 .container {
@@ -27,6 +36,7 @@
   width: 100%;
   height: 100%;
   padding: 0 1rem;
+  z-index: 999;
 }
 
 .resultContainer {
@@ -53,6 +63,15 @@
 
 .searchInput:focus {
   outline: none;
+}
+
+.showMore {
+  display: block;
+  margin-top: 0.8em;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
 @media screen and (max-width: 580px) {

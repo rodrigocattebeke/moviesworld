@@ -4,10 +4,12 @@ import styles from "./SearchInput.module.css";
 import { Search } from "@/components/icons/Search";
 import { Result } from "./Result/Result";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
   const [movies, setMovies] = useState(undefined);
+  const [series, setSeries] = useState(undefined);
   const [isSuccess, setIsSuccess] = useState(false);
   const timeoutRef = useRef();
   const router = useRouter();
@@ -36,12 +38,16 @@ export const SearchInput = () => {
     }
     timeoutRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/buscar?q=${encodeURIComponent(inputValue.trim())}&page=1`);
-        const data = await res.json();
-        setMovies(data.results);
+        const [moviesRes, seriesRes] = await Promise.all([fetch(`/api/buscar?type=movie&q=${encodeURIComponent(inputValue.trim())}&page=1`), fetch(`/api/buscar?type=tv&q=${encodeURIComponent(inputValue.trim())}&page=1`)]);
+
+        const moviesData = await moviesRes.json();
+        const seriesData = await seriesRes.json();
+        setMovies(moviesData.results.slice(0, 8));
+        setSeries(seriesData.results.slice(0, 8));
+        setIsSuccess(true);
       } catch (error) {
         console.warn(error);
-        setIsSuccess(true);
+        setIsSuccess(false);
       }
     }, 1000);
     return () => {
@@ -49,8 +55,9 @@ export const SearchInput = () => {
     };
   }, [inputValue]);
 
-  const clearMovies = () => {
-    setMovies(null);
+  const clearContent = () => {
+    setMovies(undefined);
+    setSeries(undefined);
   };
 
   return (
@@ -61,20 +68,38 @@ export const SearchInput = () => {
 
         {/* Search result modal */}
 
-        {!movies ? (
+        {!movies || !series ? (
           ""
-        ) : isSuccess ? (
-          <p>Ocurrio un error al buscar la película.</p>
         ) : (
           <div className={styles.container}>
-            <div className={styles.resultContainer}>{movies.length == 0 ? <p className="m-0 ps-3 py-2">No hay resultados para la busqueda</p> : movies.map((movie, i) => <Result movie={movie} key={i} onClick={clearMovies} />)}</div>
+            {!isSuccess ? (
+              <p>Ocurrio un error, intente de nuevo.</p>
+            ) : (
+              <div className={styles.resultContainer}>
+                {movies.length == 0 && series.length == 0 ? (
+                  <p className="m-0 ps-3 py-2">No hay resultados para la busqueda</p>
+                ) : (
+                  <>
+                    {movies.map((movie, i) => (
+                      <Result content={movie} key={i} onClick={clearContent} type={"movie"} />
+                    ))}
+                    {series.map((serie, i) => (
+                      <Result content={serie} key={i} onClick={clearContent} type={"serie"} />
+                    ))}
+
+                    <Link href={`/buscar?q=${encodeURIComponent(inputValue.trim())}`} className={styles.showMore} onClick={clearContent}>
+                      Ver todos los resultados
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         )}
-
-        {/* Backdrop */}
-
-        {/* <div className={`${styles.backdrop} ${styles.active}`}></div> */}
       </form>
+      {/* Backdrop */}
+
+      <div className={`${styles.backdrop} ${movies && series ? styles.active : ""}`} onClick={clearContent}></div>
     </>
   );
 };
