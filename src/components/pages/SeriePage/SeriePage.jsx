@@ -24,7 +24,7 @@ export const SeriePage = () => {
           <Loader />
         </div>
       ) : !serie || !recomendation ? (
-        <h3 className="my-4">Ocurrio un error al cargar la película.</h3>
+        <p className="my-4 fs-3">Ocurrio un error al cargar la película.</p>
       ) : (
         <>
           <ContentInformationView type={"serie"} content={serie} />

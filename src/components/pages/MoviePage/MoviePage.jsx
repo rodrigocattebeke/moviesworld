@@ -20,7 +20,7 @@ export const MoviePage = () => {
           <Loader />
         </div>
       ) : !movie || !recomendation ? (
-        <h3>Ocurrio un error al cargar la película.</h3>
+        <p className="my-4 fs-3">Hubo un error al cargar la película.</p>
       ) : (
         <>
           <ContentInformationView type={"pelicula"} content={movie} />
