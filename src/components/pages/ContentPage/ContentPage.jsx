@@ -50,6 +50,8 @@ export const ContentPage = ({ title = "", url = undefined, sectionFilter = undef
     const getResults = async () => {
       try {
         const res = await fetch(`${url}?page=${page}&sort_by=${orderSelected}`);
+        if (!res.ok) throw new Error(res.statusText || "Ocurrió un error, intenta de nuevo");
+
         const data = await res.json();
         setResults([...results, ...data.results]);
         setTotalPages(data.total_pages);
@@ -83,7 +85,7 @@ export const ContentPage = ({ title = "", url = undefined, sectionFilter = undef
         {isLoading ? (
           <Loader />
         ) : !results || results.length == 0 ? (
-          <p>No se encontraron resultados</p>
+          <p className="my-4 fs-3">No se encontraron resultados</p>
         ) : (
           <>
             <ContentList contentList={results} mode="search" type={type} />

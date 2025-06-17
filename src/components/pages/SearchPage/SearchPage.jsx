@@ -41,6 +41,9 @@ export default function SearchPage() {
     const getResults = async () => {
       try {
         const res = await fetch(`/api/buscar?q=${query}&page=${page}&type=${searchTypes[type]}`);
+
+        if (!res.ok) throw new Error(res.statusText || "Ocurrió un error, intenta de nuevo");
+
         const results = await res.json();
         setResults((prevResults) => [...prevResults, ...results.results]);
         setTotalPages(results.total_pages);
@@ -91,7 +94,7 @@ export default function SearchPage() {
         {isLoading ? (
           <Loader />
         ) : !results ? (
-          <h3>Ocurrio un error al hacer la búsqueda.</h3>
+          <p className="my-4 fs-3">Ocurrió un error al realizar la búsqueda, intenta nuevamente.</p>
         ) : (
           <>
             <ContentList contentList={results} mode="search" type={type} />
