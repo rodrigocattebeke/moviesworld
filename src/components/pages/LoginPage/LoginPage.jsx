@@ -6,12 +6,16 @@ import { ArrowBack } from "@/components/icons/ArrowBack";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { LoginContext } from "@/contexts/LoginContext";
+import { useRouter } from "next/navigation";
 
 export const LoginPage = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const { auth } = useContext(LoginContext);
+  const navigation = useRouter();
+
+  const pageHostName = "moviesloc.netlify.app";
 
   const handleSubmit = (e) => {
     e.preventDefault();
