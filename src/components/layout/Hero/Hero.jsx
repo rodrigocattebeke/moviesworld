@@ -5,13 +5,23 @@ import Link from "next/link";
 import { titleToSlug } from "@/utils/titleToSlug";
 
 export const Hero = async () => {
-  const res = await fetch("https://moviesloc.netlify.app/api/peliculas/populares");
-  const data = await res.json();
-  const heroMovie = data.results[0];
-  const backdropImg = getBackdropUrl(heroMovie.backdrop_path);
-  const slug = titleToSlug(heroMovie.title);
+  let data, heroMovie, backdropImg, slug;
+  try {
+    const res = await fetch("https://moviesloc.netlify.app/api/peliculas/populares");
+    if (!res.ok) throw new Error(res.statusText || "Ocurrió un error, intenta de nuevo");
 
-  return (
+    data = await res.json();
+    heroMovie = data.results[0];
+    backdropImg = getBackdropUrl(heroMovie.backdrop_path);
+    slug = titleToSlug(heroMovie.title);
+  } catch (error) {
+    console.log(error);
+    data = null;
+  }
+
+  return !data ? (
+    <p className="my-4 fs-3"></p>
+  ) : (
     <section className={`${styles.heroContainer} container-xxl p-0`}>
       <div className={`${styles.heroImgContainer}`}>
         <div className={styles.gradientOverlay}></div>
