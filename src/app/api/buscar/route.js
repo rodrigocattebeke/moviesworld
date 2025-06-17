@@ -1,6 +1,13 @@
 import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
 
 export async function GET(req) {
+  const allowedHosts = ["moviesloc.netlify.app"];
+  const host = req.headers.get("host");
+
+  if (!allowedHosts.includes(host)) {
+    return Response.json({ error: "No tienes permiso para realizar esta petición." }, { status: 401 });
+  }
+
   const query = req.nextUrl.searchParams.get("q");
   const page = req.nextUrl.searchParams.get("page");
   const type = req.nextUrl.searchParams.get("type");
