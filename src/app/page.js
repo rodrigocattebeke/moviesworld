@@ -5,6 +5,8 @@ export default async function Home() {
   try {
     const [popularMoviesRes, topRatedMoviesRes, popularSeriesRes, topRatedSeriesRes] = await Promise.all([fetch("https://moviesloc.netlify.app/api/peliculas/populares"), fetch("https://moviesloc.netlify.app/api/peliculas/mejores_valoradas"), fetch("https://moviesloc.netlify.app/api/series/populares"), fetch("https://moviesloc.netlify.app/api/series/mejores_valoradas")]);
 
+    if (!popularMoviesRes.ok || !topRatedMoviesRes.ok || !popularMoviesRes.ok || !topRatedMoviesRes.ok) throw new Error("Ocurrió un error, intenta de nuevo");
+
     const popularMovies = await popularMoviesRes.json();
     const topRatedMovies = await topRatedMoviesRes.json();
     const popularSeries = await popularSeriesRes.json();
