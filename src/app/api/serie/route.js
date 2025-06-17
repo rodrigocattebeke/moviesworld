@@ -1,7 +1,7 @@
 import { fetchFromTMDB } from "@/lib/fetchFromTMDB";
 
 export async function GET(req) {
-  const allowedHosts = ["moviesloc.netlify.app"];
+  const allowedHosts = process.env.ALLOWED_HOSTS;
   const host = req.headers.get("host");
 
   if (!allowedHosts.includes(host)) {
