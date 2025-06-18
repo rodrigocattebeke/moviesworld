@@ -59,8 +59,6 @@ export const FavoritesPage = () => {
         setContentList(data);
         setIsLoading(false);
         setIsSuccess(true);
-
-        console.log(data);
       } catch (error) {
         console.error(error);
         setIsSuccess(false);
