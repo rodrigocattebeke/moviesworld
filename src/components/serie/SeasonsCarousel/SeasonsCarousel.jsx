@@ -1,22 +1,18 @@
 "use client";
 import Slider from "react-slick";
-// import { MovieCard } from "../MovieCard/MovieCard";
 import { ArrowForward } from "@/components/icons/ArrowForward";
 import { ArrowBack } from "@/components/icons/ArrowBack";
-import "./SeasonsCarousel.css";
-import { useState } from "react";
+import styles from "./SeasonsCarousel.module.css";
 import { SeasonCard } from "../SeasonCard/SeasonCard";
 
 export const SeasonsCarousel = ({ seasons = undefined }) => {
   if (!seasons) return console.error("Se debe pasar las temporadas para mostrarlas.");
   if (!Array.isArray(seasons)) return console.error("Solo se aceptan arrays de objetos.");
 
-  const [isLoading, setIsLoading] = useState(true);
-
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div className={`${className} prevArrow`} style={{ ...style }} onClick={onClick}>
+      <div className={`${className} ${styles.prevArrow}`} style={{ ...style }} onClick={onClick}>
         <ArrowBack />
       </div>
     );
@@ -25,7 +21,7 @@ export const SeasonsCarousel = ({ seasons = undefined }) => {
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div className={`${className} nextArrow`} style={{ ...style }} onClick={onClick}>
+      <div className={`${className} ${styles.nextArrow}`} style={{ ...style }} onClick={onClick}>
         <ArrowForward />
       </div>
     );
@@ -44,8 +40,10 @@ export const SeasonsCarousel = ({ seasons = undefined }) => {
   return (
     <section className="container-xxl my-5 overflow-x-hidden">
       <>
-        <h2 className={`title`}>Temporadas</h2>
-        <Slider {...settings}>{seasons.map((season, i) => (season.air_date ? <SeasonCard season={season} /> : ""))}</Slider>
+        <h2 className={`${styles.title}`}>Temporadas</h2>
+        <Slider {...settings} className={styles.slider}>
+          {seasons.map((season, i) => (season.air_date ? <SeasonCard season={season} /> : ""))}
+        </Slider>
       </>
     </section>
   );
