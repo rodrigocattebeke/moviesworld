@@ -43,7 +43,7 @@ Puedes ver el proyecto desplegado en Netlify aquí:
 
 ## Instalación
 
-Importante. Antes de iniciar la instalación, es deseable que accedas a [TMDB](https://developer.themoviedb.org/docs/getting-started), te registres y solicites una API key para el funcionamiento correcto del sitio.
+Importante. Antes de iniciar la instalación, es importante que accedas a [TMDB](https://developer.themoviedb.org/docs/getting-started), te registres y solicites una API key para el funcionamiento correcto del sitio.
 
 1. Clonar el repositorio
 
